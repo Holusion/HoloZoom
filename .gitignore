@@ -34,3 +34,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+.vscode/
+*.x86_64
+*.zip
+*.sln
