@@ -39,3 +39,5 @@ sysinfo.txt
 *.x86_64
 *.zip
 *.sln
+HoloZoom/
+*_Data/
