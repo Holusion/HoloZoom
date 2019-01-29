@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
   - {fileID: 114431684007292132}
+  - {fileID: 114446716053367238}
 --- !u!114 &114431684007292132
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -26,7 +27,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -36,3 +37,19 @@ MonoBehaviour:
   sampleCount:
     overrideState: 1
     value: 10
+--- !u!114 &114446716053367238
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2826d729912a4a1acbad28b431ff21, type: 3}
+  m_Name: CameraFlop
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
