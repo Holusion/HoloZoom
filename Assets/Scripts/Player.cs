@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.EventSystems;
 
 public class Player : NetworkBehaviour {
 
@@ -14,7 +15,7 @@ public class Player : NetworkBehaviour {
     private float lastSpeed = 0;
 
     void Update() {
-        if(isClient) {
+        if(isClient && !EventSystem.current.IsPointerOverGameObject()) {
             float speed = Input.GetAxisRaw("Mouse X");
 
             if(Input.GetButtonDown(BUTTON_LEFT)) 
