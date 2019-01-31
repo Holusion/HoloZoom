@@ -22,7 +22,7 @@ public class Player : NetworkBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1) && hit.transform.tag == "Selectable")
                 {
                     CmdTarget(SELECT, hit.collider.gameObject.name);
                 } else {
