@@ -28,12 +28,6 @@ public class Player : NetworkBehaviour {
         return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 
-    void OnUIInteraction() {
-        if(Input.GetButtonDown(BUTTON_LEFT)) {
-            CmdTarget(SELECT, EventSystem.current.currentSelectedGameObject.GetComponent<RoomButton>().myRoom.name);
-        }
-    }
-
     [Command]
     public void CmdTarget(string action, string hit) {
         RpcTarget(action, hit);
@@ -42,6 +36,11 @@ public class Player : NetworkBehaviour {
     [Command]
     public void CmdRotate(float speed) {
         RpcRotate(speed);
+    }
+
+    [Command]
+    public void CmdEnable(string name, bool enable) {
+        RpcEnable(name, enable);
     }
 
     [ClientRpc]
@@ -62,5 +61,11 @@ public class Player : NetworkBehaviour {
         if(controller.readyToRotate) {
             controller.stateMachine.Step("rotate", () => controller.RotateTarget(speed));
         }
+    }
+
+    [ClientRpc]
+    public void RpcEnable(string name, bool enable) {
+        GameObject go = GameObject.Find(name);
+        go.SetActive(enable);
     }
 }

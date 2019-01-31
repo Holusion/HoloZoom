@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface UIEventListener
+public interface ButtonAction
 {
-    void ButtonPressed(GameObject gameObject);
+    void MakeAction(Player player);
 }

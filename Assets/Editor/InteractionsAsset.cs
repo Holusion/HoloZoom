@@ -7,4 +7,10 @@ public class InteractionsAsset {
     {
         ScriptableObjectUtility.CreateAsset<ClickSelectionInteraction>();
     }
+
+    [MenuItem("Assets/Create/Interactions/Button activation")]
+    public static void CreateButtonActivationAsset()
+    {
+        ScriptableObjectUtility.CreateAsset<ButtonActivationInteraction>();
+    }
 }
