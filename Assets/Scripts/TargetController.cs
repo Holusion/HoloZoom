@@ -80,12 +80,6 @@ public class TargetController : NetworkBehaviour {
 
             ChangeAlpha(initPos.transform.position, targetPosition);
         }
-
-        // if(readyToRotate)
-        // {
-        //     this.transform.RotateAround(this.target.transform.position, Vector3.up, this.angularVelocity * rotationSpeed);
-        //     this.angularVelocity /= 1.1f;
-        // }
     }
 
     void ChangeAlpha(Vector3 initialPos, Vector3 targetPosition)
@@ -145,16 +139,7 @@ public class TargetController : NetworkBehaviour {
 
     public void RotateTarget(float speed)
     {
-        this.target.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("SetEmpty");
         this.transform.RotateAround(this.target.transform.position, Vector3.up, speed * rotationSpeed);
-        // this.angularVelocity = speed;
-        // if(angularVelocity < -maxAngularSpeed) {
-        //     angularVelocity = -maxAngularSpeed;
-        // }
-        // if(angularVelocity > maxAngularSpeed) {
-        //     angularVelocity = maxAngularSpeed;
-        // }
-        // Debug.Log(angularVelocity);
     }
 
     void FireTargetChange()
