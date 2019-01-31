@@ -5,12 +5,8 @@ using UnityEngine;
 public abstract class Interaction : ScriptableObject
 {
 
-    protected TargetController controller;
-    
-    public virtual void Init(TargetController controller)
-    {
-        this.controller = controller;
-    }
+    protected Player player;
 
-    public abstract void UpdateInteraction(float deltaTime);
+    public abstract void UpdateInteraction(Player player);
+    public abstract bool CanInteract(Player player);
 }

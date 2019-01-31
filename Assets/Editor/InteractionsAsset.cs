@@ -7,10 +7,4 @@ public class InteractionsAsset {
     {
         ScriptableObjectUtility.CreateAsset<ClickSelectionInteraction>();
     }
-
-    [MenuItem("Assets/Create/Interactions/Network")]
-    public static void CreateNetworkAsset()
-    {
-        ScriptableObjectUtility.CreateAsset<NetworkInteraction>();
-    }
 }

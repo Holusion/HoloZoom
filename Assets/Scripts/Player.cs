@@ -6,50 +6,37 @@ using UnityEngine.EventSystems;
 
 public class Player : NetworkBehaviour {
 
-    const string BUTTON_LEFT = "Fire1";
-    const string BUTTON_RIGHT = "Fire2";
-    const string SELECT = "select";
-    const string UNSELECT = "unselect";
-    const string ROTATE = "rotate";
+    public const string BUTTON_LEFT = "Fire1";
+    public const string BUTTON_RIGHT = "Fire2";
+    public const string SELECT = "select";
+    public const string UNSELECT = "unselect";
+    public const string ROTATE = "rotate";
 
     private float lastSpeed = 0;
 
+    private InteractionManager interactionManager;
+
+    void Start() {
+        this.interactionManager = GameObject.Find("InteractionManager").GetComponent<InteractionManager>();
+    }
+
     void Update() {
-        if(isClient && !EventSystem.current.IsPointerOverGameObject()) {
-            float speed = Input.GetAxisRaw("Mouse X");
+        this.interactionManager.UpdateInteractions(this);
+    }
 
-            if(Input.GetButtonDown(BUTTON_LEFT)) 
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
+    public bool IsUI() {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+    }
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1) && hit.transform.tag == "Selectable")
-                {
-                    CmdTarget(SELECT, hit.collider.gameObject.name);
-                } else {
-                    CmdTarget(UNSELECT, "");
-                }
-            } 
-            else if(Input.GetButtonDown(BUTTON_RIGHT)) 
-            {
-                CmdTarget(UNSELECT, "");
-            } 
-            else if(Input.GetButton(BUTTON_LEFT) && speed != 0)
-            {
-                CmdRotate(speed);
-                lastSpeed = speed;
-            } else {
-                if(lastSpeed >= 0.001f || lastSpeed <= -0.001f) {
-                    lastSpeed /= 1.1f;
-                    CmdRotate(lastSpeed);
-                }
-            }
+    void OnUIInteraction() {
+        if(Input.GetButtonDown(BUTTON_LEFT)) {
+            CmdTarget(SELECT, EventSystem.current.currentSelectedGameObject.GetComponent<RoomButton>().myRoom.name);
         }
     }
 
     [Command]
-    public void CmdTarget(string interaction, string hit) {
-        RpcTarget(interaction, hit);
+    public void CmdTarget(string action, string hit) {
+        RpcTarget(action, hit);
     }
 
     [Command]
@@ -58,13 +45,13 @@ public class Player : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcTarget(string interaction, string hit) {
+    public void RpcTarget(string action, string hit) {
         GameObject go = GameObject.Find(hit);
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
 
-        if(interaction == SELECT) {
+        if(action == SELECT) {
             controller.stateMachine.Step("select", () => controller.SetTarget(go));
-        } else if (interaction == UNSELECT) {
+        } else if (action == UNSELECT) {
             controller.stateMachine.Step("unselect", () => controller.SetTarget(controller.initPos, true));
         }
     }

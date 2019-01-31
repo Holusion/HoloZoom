@@ -4,27 +4,15 @@ using UnityEngine;
 
 public class InteractionManager : MonoBehaviour {
 
-    public TargetController controller;
     public List<Interaction> interactions;
-    private bool isInit = false;
 
-    void Initialize() {
-        foreach (Interaction i in interactions)
-        {
-            i.Init(controller);
-        }
-        isInit = true;
-    }
-
-    public void UpdateInteractions()
+    public void UpdateInteractions(Player player)
     {
-        if(controller != null && !isInit) {
-            Initialize();
-        }
-
         foreach (Interaction i in interactions)
         {
-            i.UpdateInteraction(Time.deltaTime);
+            if(i.CanInteract(player)) {
+                i.UpdateInteraction(player);
+            }
         }
     }
 }
