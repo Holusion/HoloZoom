@@ -139,7 +139,7 @@ public class TargetController : NetworkBehaviour {
 
     public void RotateTarget(float speed)
     {
-        this.transform.RotateAround(this.target.transform.position, Vector3.up, speed * rotationSpeed);
+        this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, speed * rotationSpeed);
     }
 
     void FireTargetChange()

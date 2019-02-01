@@ -8,7 +8,7 @@ public class ButtonActivationInteraction : Interaction
     public override void UpdateInteraction(Player player) {
 
         if(Input.GetButtonDown(Player.BUTTON_LEFT)) {
-            EventSystem.current.currentSelectedGameObject.GetComponent<ButtonActivation>().MakeAction(player);
+            EventSystem.current.currentSelectedGameObject.GetComponent<ButtonAction>().MakeAction(player);
         }
     }
 
