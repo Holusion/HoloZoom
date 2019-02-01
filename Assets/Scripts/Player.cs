@@ -39,8 +39,8 @@ public class Player : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdEnable(string name, bool enable) {
-        RpcEnable(name, enable);
+    public void CmdEnable(GameObject go, bool enable) {
+        RpcEnable(go, enable);
     }
 
     [ClientRpc]
@@ -64,8 +64,8 @@ public class Player : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcEnable(string name, bool enable) {
-        GameObject go = GameObject.Find(name);
+    public void RpcEnable(GameObject go, bool enable) {
+        Debug.Log(go);
         go.SetActive(enable);
     }
 }

@@ -7,6 +7,6 @@ public class ButtonActivation : MonoBehaviour, ButtonAction
     public GameObject myRoom;
 
     public void MakeAction(Player player) {
-        player.CmdEnable(myRoom.name, false);
+        player.CmdEnable(myRoom, false);
     }
 }
