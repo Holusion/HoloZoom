@@ -17,14 +17,14 @@ public class ClickSelectionInteraction : Interaction
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1) && hit.transform.tag == "Selectable")
             {
-                player.CmdTarget(Player.SELECT, hit.collider.gameObject.name);
+                player.CmdTarget(Player.SELECT, hit.collider.gameObject);
             } else {
-                player.CmdTarget(Player.UNSELECT, "");
+                player.CmdTarget(Player.UNSELECT, null);
             }
         } 
         else if(Input.GetButtonDown(Player.BUTTON_RIGHT)) 
         {
-            player.CmdTarget(Player.UNSELECT, "");
+            player.CmdTarget(Player.UNSELECT, null);
         } 
         else if(Input.GetButton(Player.BUTTON_LEFT) && speed != 0)
         {

@@ -29,7 +29,7 @@ public class Player : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdTarget(string action, string hit) {
+    public void CmdTarget(string action, GameObject hit) {
         RpcTarget(action, hit);
     }
 
@@ -44,12 +44,11 @@ public class Player : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcTarget(string action, string hit) {
-        GameObject go = GameObject.Find(hit);
+    public void RpcTarget(string action, GameObject hit) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
 
         if(action == SELECT) {
-            controller.stateMachine.Step("select", () => controller.SetTarget(go));
+            controller.stateMachine.Step("select", () => controller.SetTarget(hit));
         } else if (action == UNSELECT) {
             controller.stateMachine.Step("unselect", () => controller.SetTarget(controller.initPos, true));
         }
@@ -65,7 +64,6 @@ public class Player : NetworkBehaviour {
 
     [ClientRpc]
     public void RpcEnable(GameObject go, bool enable) {
-        Debug.Log(go);
         go.SetActive(enable);
     }
 }
