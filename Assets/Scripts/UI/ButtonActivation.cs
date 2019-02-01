@@ -5,8 +5,10 @@ using UnityEngine;
 public class ButtonActivation : MonoBehaviour, ButtonAction
 {
     public GameObject myRoom;
+    private bool visible = true;
 
     public void MakeAction(Player player) {
-        player.CmdEnable(myRoom, false);
+        visible = !visible;
+        player.CmdEnable(myRoom, visible);
     }
 }

@@ -603,7 +603,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   discovery: {fileID: 1670886453}
-  isClient: 1
+  isClient: 0
 --- !u!4 &232584503
 Transform:
   m_ObjectHideFlags: 0
@@ -1598,7 +1598,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select ENSAIT
+  m_Text: Toggle ENSAIT
 --- !u!222 &1043770646
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1761,7 +1761,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Select Gare
+  m_Text: 'Toggle Gare
 
 '
 --- !u!222 &1165964321
