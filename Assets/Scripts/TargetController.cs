@@ -53,7 +53,7 @@ public class TargetController : NetworkBehaviour {
             transform.position = Vector3.Lerp(transform.position, initPos.transform.position, zoomSpeed * Time.deltaTime);
 
             Vector3 targetPosition = target.transform.position;
-            ChangeAlpha(lastTarget.transform.position, targetPosition);
+            ChangeAlpha();
             if(Vector3.Distance(transform.position, targetPosition) < 0.001)
             {
                 this.stateMachine.Step("", () => {});
@@ -78,11 +78,11 @@ public class TargetController : NetworkBehaviour {
                 this.readyToRotate = true;
             }
 
-            ChangeAlpha(initPos.transform.position, targetPosition);
+            ChangeAlpha();
         }
     }
 
-    void ChangeAlpha(Vector3 initialPos, Vector3 targetPosition)
+    void ChangeAlpha()
     {
         for(int i = 0; i < interactiveTarget.transform.childCount; i++)
         {

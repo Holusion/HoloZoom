@@ -13,12 +13,6 @@ public class NetworkHolusion : NetworkManager {
 
 	}
 
-	// public override void OnStopClient()
-	// {
-	// 	discovery.StopBroadcast();
-	// 	discovery.showGUI = true;
-	// }
-
     private void Start() {
         if(!isClient) {
             NetworkManager.singleton.StartHost();

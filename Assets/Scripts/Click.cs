@@ -50,7 +50,6 @@ namespace cakeslice
 					selectedObjects.Add (rayhit.collider.gameObject);
 
 					rayhit.collider.GetComponent<ClickOn> ().isSelected = true;
-                    // network.SendClick(rayhit.collider.gameObject);
 				}
 				else
 				{
@@ -61,7 +60,6 @@ namespace cakeslice
 							obj.GetComponent<ClickOn> ().isSelected = false;
 						}
 						selectedObjects.Clear ();
-                        // network.SendClick(null);
 					}
 				}
 			}
@@ -87,8 +85,6 @@ namespace cakeslice
 					selectedObjects.Add (rayhit.collider.gameObject);
 
 					rayhit.collider.GetComponent<ClickOn> ().isSelected = true;
-                    // network.SendClick(rayhit.collider.gameObject);
-
                 }
 				else
 				{
@@ -99,7 +95,6 @@ namespace cakeslice
 							obj.GetComponent<ClickOn> ().isSelected = false;
 						}
 						selectedObjects.Clear ();
-                        // network.SendClick(null);
                     }
 				}
 			}
