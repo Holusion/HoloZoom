@@ -1413,3 +1413,9 @@ MonoBehaviour:
   enabled:
     overrideState: 1
     value: 1
+  horizontalFlop:
+    overrideState: 0
+    value: 1
+  verticalFlop:
+    overrideState: 0
+    value: 0
