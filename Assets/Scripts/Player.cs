@@ -64,6 +64,7 @@ public class Player : NetworkBehaviour {
 
     [ClientRpc]
     public void RpcEnable(GameObject go, bool enable) {
-        go.SetActive(enable);
+        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        controller.FadeOne(go, enable);
     }
 }

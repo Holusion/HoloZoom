@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -23,6 +24,7 @@ public class TargetController : NetworkBehaviour {
     private Vector2 previousMousePosition;
     public bool readyToRotate = false;
     private float angularVelocity = 0;
+    private Dictionary<GameObject, bool> fadeAcc = new Dictionary<GameObject, bool>();
 
     void Awake()
     {
@@ -53,7 +55,6 @@ public class TargetController : NetworkBehaviour {
             transform.position = Vector3.Lerp(transform.position, initPos.transform.position, zoomSpeed * Time.deltaTime);
 
             Vector3 targetPosition = target.transform.position;
-            ChangeAlpha();
             if(Vector3.Distance(transform.position, targetPosition) < 0.001)
             {
                 this.stateMachine.Step("", () => {});
@@ -77,17 +78,49 @@ public class TargetController : NetworkBehaviour {
                 this.FireTargetHasChanged();
                 this.readyToRotate = true;
             }
-
-            ChangeAlpha();
         }
+
+        ComputeFade();
     }
 
-    void ChangeAlpha()
+    private void ComputeFade() {
+        foreach(KeyValuePair<GameObject, bool> item in fadeAcc) {
+            Fade(item.Key, item.Value);
+        }
+        
+        List<GameObject> gameObjects = new List<GameObject>(fadeAcc.Keys);
+        foreach(GameObject item in gameObjects) {
+            float fadeValue = GetFadeValue(item);
+
+            if(fadeValue <= 0 || fadeValue >= 1) {
+                fadeAcc.Remove(item);
+            }
+            if(fadeValue <= 0) item.transform.parent.gameObject.SetActive(false);
+            else item.transform.parent.gameObject.SetActive(true);
+        }
+
+    }
+
+    public void FadeAllExcept(GameObject selected, bool fadeIn)
     {
-        for(int i = 0; i < interactiveTarget.transform.childCount; i++)
+        FadeChild(this.interactiveTarget, selected, fadeIn);
+    }
+
+    public void FadeOne(GameObject selected, bool fadeIn)
+    {
+        fadeAcc.Remove(selected);
+        fadeAcc.Add(selected, fadeIn);
+        FadeChild(selected, null, fadeIn);
+    }
+
+    private void FadeChild(GameObject start, GameObject selected, bool fadeIn) {
+        foreach(Transform child in start.transform)
         {
-            Transform child = interactiveTarget.transform.GetChild(i);
-            FadeChild(child, fadeRatio);
+            if(child.gameObject != selected) {
+                fadeAcc.Remove(child.gameObject);
+                fadeAcc.Add(child.gameObject, fadeIn);
+                FadeChild(child.gameObject, selected, fadeIn);
+            }
         }
     }
 
@@ -99,29 +132,28 @@ public class TargetController : NetworkBehaviour {
         m.color = c;
     }
 
-    void FadeChild(Transform child, float ratio)
-    {
-        MeshRenderer renderer = child.GetComponent<MeshRenderer>();
+    float GetFadeValue(GameObject go) {
+        MeshRenderer renderer = go.transform.GetComponent<MeshRenderer>();
         if (renderer != null)
         {
-            Material[] m = child.GetComponent<MeshRenderer>().materials;
+            Material[] m = renderer.materials;
             for(int i = 0; i < m.Length; i++)
             {
-                if (!target.transform.Equals(child) && !reset)
-                {
-                    this.FadeValue(m[i], -ratio);
-                }
-                else
-                {
-                    this.FadeValue(m[i], ratio);
-                }
+                return m[i].color.a;
             }
         }
-        if(child.childCount > 0)
+        return 2;
+    }
+
+    public void Fade(GameObject go, bool fadeIn)
+    {
+        MeshRenderer renderer = go.transform.GetComponent<MeshRenderer>();
+        if (renderer != null)
         {
-            for(int i = 0; i < child.childCount; i++)
+            Material[] m = renderer.materials;
+            for(int i = 0; i < m.Length; i++)
             {
-                FadeChild(child.GetChild(i), ratio);
+                this.FadeValue(m[i], fadeRatio * (fadeIn ? 1 : -1));
             }
         }
     }
@@ -133,6 +165,9 @@ public class TargetController : NetworkBehaviour {
         if(!reset)
         {
             targetChange = true;
+            FadeAllExcept(go, false);
+        } else {
+            FadeAllExcept(go, true);
         }
         this.FireTargetChange();
     }
