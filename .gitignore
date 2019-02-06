@@ -34,6 +34,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Holozoom_Data/
+
 
 .vscode/
 *.x86_64
