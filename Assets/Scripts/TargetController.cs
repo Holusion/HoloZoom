@@ -199,7 +199,7 @@ public class TargetController : NetworkBehaviour {
 
     public void RotateTarget(float speed)
     {
-        if(this.target.GetComponent<BoxCollider>() != null) {
+        if(this.target.GetComponent<BoxCollider>() != null && readyToRotate) {
             this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, speed * rotationSpeed);
         }
     }
