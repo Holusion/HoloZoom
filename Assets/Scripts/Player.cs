@@ -48,9 +48,9 @@ public class Player : NetworkBehaviour {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
 
         if(action == SELECT) {
-            controller.stateMachine.Step("select", () => controller.SetTarget(hit));
+            controller.SetTarget(hit);
         } else if (action == UNSELECT) {
-            controller.stateMachine.Step("unselect", () => controller.SetTarget(controller.initPos, true));
+            controller.SetTarget(controller.initPos, true);
         }
     }
 
@@ -58,7 +58,7 @@ public class Player : NetworkBehaviour {
     public void RpcRotate(float speed) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
         if(controller.readyToRotate) {
-            controller.stateMachine.Step("rotate", () => controller.RotateTarget(speed));
+            controller.RotateTarget(speed);
         }
     }
 

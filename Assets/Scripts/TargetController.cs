@@ -106,6 +106,17 @@ public class TargetController : NetworkBehaviour {
         FadeChild(this.interactiveTarget, selected, fadeIn);
     }
 
+    public void FadeExceptTargetActivator(GameObject activator, bool fadeIn) 
+    {
+        FadeChildActivator(this.interactiveTarget, activator, fadeIn);
+    }
+
+    public void FadeInActivator(GameObject activator) {
+        foreach(GameObject go in activator.GetComponent<Activator>().nextSelectable) {
+            FadeChild(this.interactiveTarget, go, true);
+        }
+    }
+
     public void FadeOne(GameObject selected, bool fadeIn)
     {
         fadeAcc.Remove(selected);
@@ -120,6 +131,17 @@ public class TargetController : NetworkBehaviour {
                 fadeAcc.Remove(child.gameObject);
                 fadeAcc.Add(child.gameObject, fadeIn);
                 FadeChild(child.gameObject, selected, fadeIn);
+            }
+        }
+    }
+
+    private void FadeChildActivator(GameObject start, GameObject activator, bool fadeIn) {
+        foreach(Transform child in start.transform)
+        {
+            if(!activator.GetComponent<Activator>().nextSelectable.Contains(child.gameObject) && child.gameObject != activator) {
+                fadeAcc.Remove(child.gameObject);
+                fadeAcc.Add(child.gameObject, fadeIn);
+                FadeChildActivator(child.gameObject, activator, fadeIn);
             }
         }
     }
@@ -160,15 +182,16 @@ public class TargetController : NetworkBehaviour {
 
     public void SetTarget(GameObject go, bool reset = false)
     {
+        if(this.lastTarget == null || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
+            targetChange = true;
+            FadeExceptTargetActivator(go, false);
+        } else {
+            FadeInActivator(go);
+        }
+
         this.target = go;
         this.reset = reset;
-        if(!reset)
-        {
-            targetChange = true;
-            FadeAllExcept(go, false);
-        } else {
-            FadeAllExcept(go, true);
-        }
+
         this.FireTargetChange();
     }
 
