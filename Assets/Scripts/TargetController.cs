@@ -49,33 +49,28 @@ public class TargetController : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(reset && this.lastTarget != null)
+        if(targetChange)
         {
-            this.readyToRotate = false;
-            transform.rotation = Quaternion.Lerp(transform.rotation, initRotation, rotationSpeed * Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position, initPos.transform.position, zoomSpeed * Time.deltaTime);
+            Vector3 direction;
+            Vector3 targetPosition;
+            Quaternion toRotation;
 
-            Vector3 targetPosition = target.transform.position;
-            if(Vector3.Distance(transform.position, targetPosition) < 0.001)
-            {
-                this.stateMachine.Step("", () => {});
-                this.FireReset();
+            if(target.GetComponent<BoxCollider>() != null) {
+                direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;
+                targetPosition = target.transform.Find("CamPos").transform.position;
+                toRotation = Quaternion.LookRotation(direction);
+            } else {
+                targetPosition = target.transform.position;
+                toRotation = initRotation;
             }
-        }
 
-        if(targetChange && !reset)
-        {
-            Vector3 direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;
-            Quaternion toRotation = Quaternion.LookRotation(direction);
             this.transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             this.readyToRotate = false;
 
-            Vector3 targetPosition = target.transform.Find("CamPos").transform.position;
             transform.position = Vector3.Lerp(transform.position,targetPosition, zoomSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, targetPosition) < 0.1 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
                 targetChange = false;
-                lastTarget = target.gameObject;
                 this.FireTargetHasChanged();
                 this.readyToRotate = true;
             }
@@ -116,6 +111,7 @@ public class TargetController : NetworkBehaviour {
         foreach(GameObject go in activator.GetComponent<Activator>().nextSelectable) {
             FadeChild(this.interactiveTarget, go, true);
         }
+        FadeChild(this.interactiveTarget, activator, true);
     }
 
     public void FadeOne(GameObject selected, bool fadeIn)
@@ -186,11 +182,16 @@ public class TargetController : NetworkBehaviour {
         if(this.lastTarget == null || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
             targetChange = true;
             FadeExceptTargetActivator(go, false);
+            lastTarget = this.target;
+            this.target = go;
         } else {
-            FadeInActivator(go);
+            targetChange = true;
+            FadeInActivator(lastTarget);
+            GameObject tmp = this.target;
+            this.target = lastTarget;
+            lastTarget = tmp;
         }
-
-        this.target = go;
+        
         this.reset = reset;
 
         this.FireTargetChange();
@@ -198,7 +199,9 @@ public class TargetController : NetworkBehaviour {
 
     public void RotateTarget(float speed)
     {
-        this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, speed * rotationSpeed);
+        if(this.target.GetComponent<BoxCollider>() != null) {
+            this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, speed * rotationSpeed);
+        }
     }
 
     void FireTargetChange()

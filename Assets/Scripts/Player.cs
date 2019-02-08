@@ -74,16 +74,14 @@ public class Player : NetworkBehaviour {
         if(action == SELECT && selected != null) {
             controller.SetTarget(selected);
         } else if (action == UNSELECT) {
-            controller.SetTarget(controller.initPos, true);
+            controller.SetTarget(null, true);
         }
     }
 
     [ClientRpc]
     public void RpcRotate(float speed) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
-        if(controller.readyToRotate) {
-            controller.RotateTarget(speed);
-        }
+        controller.RotateTarget(speed);
     }
 
     [ClientRpc]
