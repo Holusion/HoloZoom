@@ -15,12 +15,25 @@ public class ClickSelectionInteraction : Interaction
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1) && hit.transform.tag == "Selectable")
-            {
-                player.CmdTarget(Player.SELECT, hit.collider.gameObject);
-            } else {
+            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, 1);
+
+            if(hits.Length == 0) {
                 player.CmdTarget(Player.UNSELECT, null);
+            } else {
+                string[] gameObjectsNames = new string[hits.Length];
+                for(int i = 0; i < gameObjectsNames.Length; i++) {
+                    gameObjectsNames[i] = hits[i].collider.gameObject.name;
+                }
+                player.CmdTargets(Player.SELECT, gameObjectsNames);
             }
+
+            // if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1) && hit.transform.tag == "Selectable")
+            // {
+            //     player.CmdTarget(Player.SELECT, hit.collider.gameObject);
+            // } else {
+            // }
+
+
         } 
         else if(Input.GetButtonDown(Player.BUTTON_RIGHT)) 
         {

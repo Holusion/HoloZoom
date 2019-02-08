@@ -442,7 +442,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   discovery: {fileID: 1670886453}
-  isClient: 0
+  isClient: 1
 --- !u!4 &232584503
 Transform:
   m_ObjectHideFlags: 0

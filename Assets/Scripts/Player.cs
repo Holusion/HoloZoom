@@ -34,6 +34,11 @@ public class Player : NetworkBehaviour {
     }
 
     [Command]
+    public void CmdTargets(string action, string[] hit) {
+        RpcTargets(action, hit);
+    }
+
+    [Command]
     public void CmdRotate(float speed) {
         RpcRotate(speed);
     }
@@ -49,6 +54,25 @@ public class Player : NetworkBehaviour {
 
         if(action == SELECT) {
             controller.SetTarget(hit);
+        } else if (action == UNSELECT) {
+            controller.SetTarget(controller.initPos, true);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcTargets(string action, string[] hit) {
+        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        GameObject selected = null;
+
+        foreach(string s in hit) {
+            selected = controller.target.GetComponent<Activator>().nextSelectable.Find(x => x.name == s);
+            if(selected != null) {
+                break;
+            }
+        }
+
+        if(action == SELECT && selected != null) {
+            controller.SetTarget(selected);
         } else if (action == UNSELECT) {
             controller.SetTarget(controller.initPos, true);
         }

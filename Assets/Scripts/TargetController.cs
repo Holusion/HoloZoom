@@ -44,6 +44,7 @@ public class TargetController : NetworkBehaviour {
         this.target = initPos;
         this.lastTarget = null;
         this.stateMachine = new ZoomStateMachine();
+        this.target = this.initPos;
 	}
 	
 	// Update is called once per frame
