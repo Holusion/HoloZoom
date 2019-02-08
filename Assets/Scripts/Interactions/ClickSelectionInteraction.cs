@@ -26,14 +26,6 @@ public class ClickSelectionInteraction : Interaction
                 }
                 player.CmdTargets(Player.SELECT, gameObjectsNames);
             }
-
-            // if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1) && hit.transform.tag == "Selectable")
-            // {
-            //     player.CmdTarget(Player.SELECT, hit.collider.gameObject);
-            // } else {
-            // }
-
-
         } 
         else if(Input.GetButtonDown(Player.BUTTON_RIGHT)) 
         {

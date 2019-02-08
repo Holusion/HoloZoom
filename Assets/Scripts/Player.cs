@@ -55,7 +55,7 @@ public class Player : NetworkBehaviour {
         if(action == SELECT) {
             controller.SetTarget(hit);
         } else if (action == UNSELECT) {
-            controller.SetTarget(controller.initPos, true);
+            controller.SetTarget(null, true);
         }
     }
 

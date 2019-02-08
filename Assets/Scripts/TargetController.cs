@@ -184,7 +184,7 @@ public class TargetController : NetworkBehaviour {
             FadeExceptTargetActivator(go, false);
             lastTarget = this.target;
             this.target = go;
-        } else {
+        } else if(!this.reset) {
             targetChange = true;
             FadeInActivator(lastTarget);
             GameObject tmp = this.target;
