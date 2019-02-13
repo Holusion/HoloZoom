@@ -15,7 +15,7 @@ public class TargetController : NetworkBehaviour {
     bool targetChange = false;
     bool reset = true;
     Quaternion initRotation;
-    GameObject lastTarget;
+    Stack<GameObject> lastTarget;
     public GameObject initPos;
 
     private List<TargetEventListener> listeners;
@@ -42,7 +42,7 @@ public class TargetController : NetworkBehaviour {
         this.interactiveTarget = GameObject.Find("InteractiveObjects");
         this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
-        this.lastTarget = null;
+        this.lastTarget = new Stack<GameObject>();
         this.stateMachine = new ZoomStateMachine();
         this.target = this.initPos;
 	}
@@ -179,17 +179,18 @@ public class TargetController : NetworkBehaviour {
 
     public void SetTarget(GameObject go, bool reset = false)
     {
-        if(this.lastTarget == null || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
+        if(this.lastTarget.Count == 0 || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
             targetChange = true;
             FadeExceptTargetActivator(go, false);
-            lastTarget = this.target;
+            lastTarget.Push(this.target);
             this.target = go;
         } else if(!this.reset) {
+            GameObject previousTarget = lastTarget.Pop();
             targetChange = true;
-            FadeInActivator(lastTarget);
+            FadeInActivator(previousTarget);
             GameObject tmp = this.target;
-            this.target = lastTarget;
-            lastTarget = tmp;
+            this.target = previousTarget;
+            lastTarget.Push(tmp);
         }
         
         this.reset = reset;
