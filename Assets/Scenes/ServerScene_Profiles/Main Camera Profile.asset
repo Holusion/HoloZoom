@@ -1414,8 +1414,8 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   horizontalFlop:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0
   verticalFlop:
-    overrideState: 0
+    overrideState: 1
     value: 0
