@@ -1409,13 +1409,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2826d729912a4a1acbad28b431ff21, type: 3}
   m_Name: CameraFlop
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
-  horizontalFlop:
+  horizontal:
     overrideState: 1
     value: 0
-  verticalFlop:
-    overrideState: 1
-    value: 0
+  vertical:
+    overrideState: 0
+    value: 1
