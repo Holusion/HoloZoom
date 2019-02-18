@@ -11,7 +11,7 @@ public class TargetController : NetworkBehaviour {
     public float fadeRatio = 0.1f;
     public float rotationSpeed = 0.1f;
     public float zoomSpeed = 5f;
-    public float maxAngularSpeed = 5f;
+    public float maxAngularSpeed = 10f;
     bool targetChange = false;
     bool reset = true;
     Quaternion initRotation;
@@ -200,8 +200,15 @@ public class TargetController : NetworkBehaviour {
 
     public void RotateTarget(float speed)
     {
+        float tmpSpeed = speed;
         if(this.target.GetComponent<BoxCollider>() != null && readyToRotate) {
-            this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, speed * rotationSpeed);
+            if(speed >= maxAngularSpeed) {
+                tmpSpeed = maxAngularSpeed;
+            }
+            if(speed <= -maxAngularSpeed) {
+                tmpSpeed = -maxAngularSpeed;
+            }
+            this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, tmpSpeed);
         }
     }
 

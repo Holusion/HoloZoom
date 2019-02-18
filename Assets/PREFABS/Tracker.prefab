@@ -107,8 +107,8 @@ MonoBehaviour:
   fadeRatio: 0.1
   rotationSpeed: 5
   zoomSpeed: 5
+  maxAngularSpeed: 100
   initPos: {fileID: 0}
-  network: {fileID: 0}
   readyToRotate: 0
 --- !u!1 &25
 GameObject:
