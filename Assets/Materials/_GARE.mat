@@ -10,6 +10,7 @@ Material:
   m_Name: _GARE
   m_Shader: {fileID: 4800000, guid: 5211dca7e9aa5f946a1ba2e0ec2edc93, type: 3}
   m_ShaderKeywords: _ALPHABLEND_ON _GLOSSYREFLECTIONS_OFF _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+    _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -74,7 +75,7 @@ Material:
     - _Parallax: 0.02
     - _Shininess: 1
     - _SmoothnessTextureChannel: 1
-    - _SpecularHighlights: 1
+    - _SpecularHighlights: 0
     - _SrcBlend: 5
     - _UVSec: 0
     - _ZWrite: 0
