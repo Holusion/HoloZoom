@@ -179,7 +179,7 @@ public class TargetController : NetworkBehaviour {
 
     public void SetTarget(GameObject go, bool reset = false)
     {
-        if(this.lastTarget.Count == 0 || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
+        if(this.lastTarget.Count == 0 && go != null || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
             targetChange = true;
             FadeExceptTargetActivator(go, false);
             lastTarget.Push(this.target);
