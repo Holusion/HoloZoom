@@ -21,9 +21,7 @@ public class TargetController : NetworkBehaviour {
     private List<TargetEventListener> listeners;
     public ZoomStateMachine stateMachine { get; private set; }
 
-    private Vector2 previousMousePosition;
     public bool readyToRotate = false;
-    private float angularVelocity = 0;
     private Dictionary<GameObject, bool> fadeAcc = new Dictionary<GameObject, bool>();
 
     void Awake()
