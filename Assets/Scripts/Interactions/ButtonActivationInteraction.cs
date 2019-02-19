@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[CreateAssetMenu(fileName="Button activation", menuName="Interactions/Button activation")]
 public class ButtonActivationInteraction : Interaction
 {
     public override void UpdateInteraction(Player player) {

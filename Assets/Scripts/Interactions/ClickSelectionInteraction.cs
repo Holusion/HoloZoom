@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName="Click selector", menuName="Interactions/Click selector")]
 public class ClickSelectionInteraction : Interaction
 {
     private float lastSpeed;
