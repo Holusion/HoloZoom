@@ -69,121 +69,21 @@ public class TargetController : NetworkBehaviour {
                 this.readyToRotate = true;
             }
         }
-
-        ComputeFade();
-    }
-
-    private void ComputeFade() {
-        foreach(KeyValuePair<GameObject, bool> item in fadeAcc) {
-            Fade(item.Key, item.Value);
-        }
-        
-        List<GameObject> gameObjects = new List<GameObject>(fadeAcc.Keys);
-        foreach(GameObject item in gameObjects) {
-            float fadeValue = GetFadeValue(item);
-
-            if(fadeValue <= 0 || fadeValue >= 1) {
-                fadeAcc.Remove(item);
-            }
-            if(fadeValue <= 0) item.transform.parent.gameObject.SetActive(false);
-            else item.transform.parent.gameObject.SetActive(true);
-        }
-
-    }
-
-    public void FadeAllExcept(GameObject selected, bool fadeIn)
-    {
-        FadeChild(this.interactiveTarget, selected, fadeIn);
-    }
-
-    public void FadeExceptTargetActivator(GameObject activator, bool fadeIn) 
-    {
-        FadeChildActivator(this.interactiveTarget, activator, fadeIn);
-    }
-
-    public void FadeInActivator(GameObject activator) {
-        foreach(GameObject go in activator.GetComponent<Activator>().nextSelectable) {
-            FadeChild(this.interactiveTarget, go, true);
-        }
-        FadeChild(this.interactiveTarget, activator, true);
-    }
-
-    public void FadeOne(GameObject selected, bool fadeIn)
-    {
-        fadeAcc.Remove(selected);
-        fadeAcc.Add(selected, fadeIn);
-        FadeChild(selected, null, fadeIn);
-    }
-
-    private void FadeChild(GameObject start, GameObject selected, bool fadeIn) {
-        foreach(Transform child in start.transform)
-        {
-            if(child.gameObject != selected) {
-                fadeAcc.Remove(child.gameObject);
-                fadeAcc.Add(child.gameObject, fadeIn);
-                FadeChild(child.gameObject, selected, fadeIn);
-            }
-        }
-    }
-
-    private void FadeChildActivator(GameObject start, GameObject activator, bool fadeIn) {
-        foreach(Transform child in start.transform)
-        {
-            if(!activator.GetComponent<Activator>().nextSelectable.Contains(child.gameObject) && child.gameObject != activator) {
-                fadeAcc.Remove(child.gameObject);
-                fadeAcc.Add(child.gameObject, fadeIn);
-                FadeChildActivator(child.gameObject, activator, fadeIn);
-            }
-        }
-    }
-
-    void FadeValue(Material m, float value)
-    {
-        Color c = m.color;
-        c.a += value;
-        c.a = Mathf.Clamp(c.a, 0, 1);
-        m.color = c;
-    }
-
-    float GetFadeValue(GameObject go) {
-        MeshRenderer renderer = go.transform.GetComponent<MeshRenderer>();
-        if (renderer != null)
-        {
-            Material[] m = renderer.materials;
-            for(int i = 0; i < m.Length; i++)
-            {
-                return m[i].color.a;
-            }
-        }
-        return 2;
-    }
-
-    public void Fade(GameObject go, bool fadeIn)
-    {
-        MeshRenderer renderer = go.transform.GetComponent<MeshRenderer>();
-        if (renderer != null)
-        {
-            Material[] m = renderer.materials;
-            for(int i = 0; i < m.Length; i++)
-            {
-                this.FadeValue(m[i], fadeRatio * (fadeIn ? 1 : -1));
-            }
-        }
     }
 
     public void SetTarget(GameObject go, bool reset = false)
     {
         if(this.lastTarget.Count == 0 && go != null || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
             targetChange = true;
-            FadeExceptTargetActivator(go, false);
             lastTarget.Push(this.target);
             this.target = go;
             ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
             answer.OnSelected(lastTarget.Peek());
         } else if(reset && this.lastTarget.Count > 0) {
             GameObject previousTarget = lastTarget.Pop();
+            ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
+            answer.OnUnselected(previousTarget);
             targetChange = true;
-            FadeInActivator(previousTarget);
             GameObject tmp = this.target;
             this.target = previousTarget;
         }
@@ -202,6 +102,13 @@ public class TargetController : NetworkBehaviour {
                 tmpSpeed = -maxAngularSpeed;
             }
             this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, tmpSpeed);
+        }
+    }
+
+    public void Enable(GameObject go, bool enable) {
+        ITargetAnswer answer = go.GetComponent<ITargetAnswer>();
+        if(answer != null) {
+            answer.OnActive(enable);
         }
     }
 }
