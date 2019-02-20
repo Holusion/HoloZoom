@@ -9,7 +9,6 @@ public class BubbleTextAnimationController : MonoBehaviour, ITargetAnswer
         Activator activator = previousTarget.GetComponent<Activator>();
         foreach(GameObject go in activator.nextSelectable) {
             if(go != this.gameObject) {
-                Debug.Log(go.name);
                 GameObject bubbleText = go.transform.Find("BubbleText").gameObject;
                 Animator anim = go.transform.Find("BubbleText").gameObject.GetComponent<Animator>();
                 int trigger = Animator.StringToHash("Close");

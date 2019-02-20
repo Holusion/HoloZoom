@@ -180,13 +180,12 @@ public class TargetController : NetworkBehaviour {
             this.target = go;
             ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
             answer.OnSelected(lastTarget.Peek());
-        } else if(!this.reset) {
+        } else if(reset && this.lastTarget.Count > 0) {
             GameObject previousTarget = lastTarget.Pop();
             targetChange = true;
             FadeInActivator(previousTarget);
             GameObject tmp = this.target;
             this.target = previousTarget;
-            lastTarget.Push(tmp);
         }
         
         this.reset = reset;
@@ -204,13 +203,5 @@ public class TargetController : NetworkBehaviour {
             }
             this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, tmpSpeed);
         }
-    }
-
-    public void LaunchAnimation(GameObject go, string trigger) 
-    {
-        // AnimationController animController = go.GetComponent<AnimationController>();
-        // if(animController != null) {
-        //     animController.LaunchAnimation(trigger);
-        // }
     }
 }
