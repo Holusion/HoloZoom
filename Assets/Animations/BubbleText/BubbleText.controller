@@ -9,13 +9,13 @@ AnimatorController:
   m_Name: BubbleText
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: close
+  - m_Name: Close
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: open
+  - m_Name: Open
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -43,7 +43,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: close
+    m_ConditionEvent: Close
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102069115317354440}
@@ -68,7 +68,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: open
+    m_ConditionEvent: Open
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102277661665308172}

@@ -17,8 +17,6 @@ public class TargetController : NetworkBehaviour {
     Quaternion initRotation;
     Stack<GameObject> lastTarget;
     public GameObject initPos;
-
-    private List<TargetEventListener> listeners;
     public ZoomStateMachine stateMachine { get; private set; }
 
     public bool readyToRotate = false;
@@ -26,7 +24,6 @@ public class TargetController : NetworkBehaviour {
 
     void Awake()
     {
-        this.listeners = new List<TargetEventListener>();
         Vector3 position = this.transform.position;
         Quaternion rotation = this.transform.rotation;
 
@@ -69,7 +66,6 @@ public class TargetController : NetworkBehaviour {
             if (Vector3.Distance(transform.position, targetPosition) < 0.1 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
                 targetChange = false;
-                this.FireTargetHasChanged();
                 this.readyToRotate = true;
             }
         }
@@ -182,6 +178,8 @@ public class TargetController : NetworkBehaviour {
             FadeExceptTargetActivator(go, false);
             lastTarget.Push(this.target);
             this.target = go;
+            ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
+            answer.OnSelected(lastTarget.Peek());
         } else if(!this.reset) {
             GameObject previousTarget = lastTarget.Pop();
             targetChange = true;
@@ -192,8 +190,6 @@ public class TargetController : NetworkBehaviour {
         }
         
         this.reset = reset;
-
-        this.FireTargetChange();
     }
 
     public void RotateTarget(float speed)
@@ -212,35 +208,9 @@ public class TargetController : NetworkBehaviour {
 
     public void LaunchAnimation(GameObject go, string trigger) 
     {
-        Animator anim = go.GetComponent<Animator>();
-        if(anim != null) {
-            int triggerHash = Animator.StringToHash(trigger);
-            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-            anim.SetTrigger(triggerHash);
-        }
-    }
-
-    void FireTargetChange()
-    {
-        foreach (TargetEventListener l in listeners)
-        {
-            l.TargetChange(target);
-        }
-    }
-
-    void FireTargetHasChanged()
-    {
-        foreach (TargetEventListener l in listeners)
-        {
-            l.TargetHasChanged(target);
-        }
-    }
-
-    void FireReset()
-    {
-        foreach (TargetEventListener l in listeners)
-        {
-            l.Reset();
-        }
+        // AnimationController animController = go.GetComponent<AnimationController>();
+        // if(animController != null) {
+        //     animController.LaunchAnimation(trigger);
+        // }
     }
 }
