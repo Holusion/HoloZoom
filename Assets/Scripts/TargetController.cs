@@ -210,6 +210,16 @@ public class TargetController : NetworkBehaviour {
         }
     }
 
+    public void LaunchAnimation(GameObject go, string trigger) 
+    {
+        Animator anim = go.GetComponent<Animator>();
+        if(anim != null) {
+            int triggerHash = Animator.StringToHash(trigger);
+            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            anim.SetTrigger(triggerHash);
+        }
+    }
+
     void FireTargetChange()
     {
         foreach (TargetEventListener l in listeners)
