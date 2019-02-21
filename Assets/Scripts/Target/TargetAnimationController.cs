@@ -14,26 +14,39 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
 
     public void OnSelected(GameObject previousTarget)
     {
+        int trigger = Animator.StringToHash("Close");
         Activator activator = previousTarget.GetComponent<Activator>();
         foreach(GameObject go in activator.nextSelectable) {
             if(go != this.gameObject) {
                 Animator anim = go.GetComponent<Animator>();
-                int trigger = Animator.StringToHash("Close");
-                anim.SetTrigger(trigger);
+                if(anim != null) {
+                    anim.SetTrigger(trigger);
+                }
             }
+        }
+
+        Animator previousTargetAnim = previousTarget.GetComponent<Animator>();
+        if(previousTargetAnim != null) {
+            previousTargetAnim.SetTrigger(trigger);
         }
     }
 
     public void OnUnselected(GameObject previousTarget)
     {
+        int trigger = Animator.StringToHash("Open");
         Activator activator = previousTarget.GetComponent<Activator>();
         foreach(GameObject go in activator.nextSelectable) {
             if(go != this.gameObject) {
                 go.SetActive(true);
                 Animator anim = go.GetComponent<Animator>();
-                int trigger = Animator.StringToHash("Open");
                 anim.SetTrigger(trigger);
             }
+        }
+
+        Animator previousTargetAnim = previousTarget.GetComponent<Animator>();
+        previousTarget.SetActive(true);
+        if(previousTargetAnim != null) {
+            previousTargetAnim.SetTrigger(trigger);
         }
     }
 
