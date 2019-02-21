@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubbleTextAnimationController : MonoBehaviour, ITargetAnswer
+public class TargetAnimationController : MonoBehaviour, ITargetAnswer
 {
     public void OnActive(bool enable)
     {
