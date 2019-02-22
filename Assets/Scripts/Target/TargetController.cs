@@ -102,6 +102,10 @@ public class TargetController : NetworkBehaviour {
                 tmpSpeed = -maxAngularSpeed;
             }
             this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, tmpSpeed);
+            ITargetAnswer answer = target.GetComponent<ITargetAnswer>();
+            if(answer != null) {
+                answer.OnRotate();
+            }
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TargetAnimationController : MonoBehaviour, ITargetAnswer
 {
+    public void OnRotate() {}
     public void OnActive(bool enable)
     {
         if(enable) this.gameObject.SetActive(true);

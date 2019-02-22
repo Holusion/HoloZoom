@@ -12,4 +12,5 @@ public interface ITargetAnswer
     void OnActive(bool enable);
     // Method to use to inform Unity that this.gameObject should be disable (for exemple, event animation) 
     void OnDesactive();
+    void OnRotate();
 }
