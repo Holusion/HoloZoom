@@ -78,11 +78,15 @@ public class TargetController : NetworkBehaviour {
             lastTarget.Push(this.target);
             this.target = go;
             ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
-            answer.OnSelected(lastTarget.Peek());
+            if(answer != null) {
+                answer.OnSelected(lastTarget.Peek());
+            }
         } else if(reset && this.lastTarget.Count > 0) {
             GameObject previousTarget = lastTarget.Pop();
             ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
-            answer.OnUnselected(previousTarget);
+            if(answer != null) {
+                answer.OnUnselected(previousTarget);
+            }
             targetChange = true;
             GameObject tmp = this.target;
             this.target = previousTarget;
