@@ -98,19 +98,29 @@ public class TargetController : NetworkBehaviour {
     public void RotateTarget(float speed)
     {
         float tmpSpeed = speed;
-        if(this.target.GetComponent<BoxCollider>() != null && readyToRotate) {
-            if(speed >= maxAngularSpeed) {
-                tmpSpeed = maxAngularSpeed;
-            }
-            if(speed <= -maxAngularSpeed) {
-                tmpSpeed = -maxAngularSpeed;
-            }
-            this.transform.RotateAround(this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center), Vector3.up, tmpSpeed);
+        Vector3 rotateAroundPoint = new Vector3();
+
+        if(this.target.GetComponent<BoxCollider>() != null) {
+            rotateAroundPoint = this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center);
             ITargetAnswer answer = target.GetComponent<ITargetAnswer>();
             if(answer != null) {
                 answer.OnRotate();
             }
+        } else {
+            foreach(GameObject go in this.target.GetComponent<Activator>().nextSelectable) {
+                rotateAroundPoint += go.transform.position;
+            }
+            rotateAroundPoint /= this.target.GetComponent<Activator>().nextSelectable.Count;
         }
+
+        if(speed >= maxAngularSpeed) {
+            tmpSpeed = maxAngularSpeed;
+        }
+        if(speed <= -maxAngularSpeed) {
+            tmpSpeed = -maxAngularSpeed;
+        }
+        this.transform.RotateAround(rotateAroundPoint, Vector3.up, tmpSpeed);
+
     }
 
     public void Enable(GameObject go, bool enable) {
