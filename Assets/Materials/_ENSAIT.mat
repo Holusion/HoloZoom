@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: _ENSAIT
-  m_Shader: {fileID: 4800000, guid: 5211dca7e9aa5f946a1ba2e0ec2edc93, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6b0a2ccfb806c9549a57533027c46aa2, type: 3}
   m_ShaderKeywords: _ALPHABLEND_ON _GLOSSYREFLECTIONS_OFF _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
     _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
