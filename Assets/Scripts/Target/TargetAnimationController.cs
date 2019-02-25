@@ -13,16 +13,27 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
         anim.SetTrigger(trigger);
     }
 
+    void FadeOut(GameObject go, int trigger) {
+        Animator anim = go.GetComponent<Animator>();
+        if(anim != null) {
+            anim.SetTrigger(trigger);
+        }
+
+        Activator activator = go.GetComponent<Activator>();
+        if(activator != null) {
+            foreach(GameObject goActivator in activator.nextSelectable) {
+                FadeOut(goActivator, trigger);
+            }
+        }
+    }
+
     public void OnSelected(GameObject previousTarget)
     {
         int trigger = Animator.StringToHash("Close");
         Activator activator = previousTarget.GetComponent<Activator>();
         foreach(GameObject go in activator.nextSelectable) {
             if(go != this.gameObject) {
-                Animator anim = go.GetComponent<Animator>();
-                if(anim != null) {
-                    anim.SetTrigger(trigger);
-                }
+                FadeOut(go, trigger);
             }
         }
 
