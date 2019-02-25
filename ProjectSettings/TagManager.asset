@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Selectable
   - Tracker
+  - Decoy
+  - Wall
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - Wall
   - 
   - 
   - 
