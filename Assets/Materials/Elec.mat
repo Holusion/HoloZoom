@@ -10,7 +10,7 @@ Material:
   m_Name: Elec
   m_Shader: {fileID: 4800000, guid: 6b0a2ccfb806c9549a57533027c46aa2, type: 3}
   m_ShaderKeywords: _ALPHABLEND_ON _EMISSION _GLOSSYREFLECTIONS_OFF
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -78,6 +78,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.75, b: 0, a: 0.7764706}
-    - _EmissionColor: {r: 1, g: 0.21176471, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 1.8777903, g: 0.7307671, b: 0.40744504, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
