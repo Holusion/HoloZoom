@@ -90,6 +90,7 @@ public class TargetController : NetworkBehaviour {
             targetChange = true;
             GameObject tmp = this.target;
             this.target = previousTarget;
+            this.target.GetComponent<ITargetAnswer>().OnSelected(lastTarget.Peek());
         }
         
         this.reset = reset;

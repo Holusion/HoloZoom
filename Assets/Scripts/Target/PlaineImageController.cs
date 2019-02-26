@@ -21,4 +21,11 @@ public class PlaineImageController : TargetAnimationController, ITargetAnswer
         _2020.gameObject.SetActive(false);
         _2021.gameObject.SetActive(false);
     }
+
+    public new void OnDesactive() {
+        base.OnDesactive();
+
+        _2020.gameObject.SetActive(false);
+        _2021.gameObject.SetActive(false);
+    }
 }
