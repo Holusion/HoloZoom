@@ -8,7 +8,6 @@ public class TargetController : NetworkBehaviour {
 
     public GameObject interactiveTarget;
     public GameObject target;
-    public float fadeRatio = 0.1f;
     public float rotationSpeed = 0.1f;
     public float zoomSpeed = 5f;
     public float maxAngularSpeed = 10f;
@@ -17,10 +16,8 @@ public class TargetController : NetworkBehaviour {
     Quaternion initRotation;
     Stack<GameObject> lastTarget;
     public GameObject initPos;
-    public ZoomStateMachine stateMachine { get; private set; }
 
     public bool readyToRotate = false;
-    private Dictionary<GameObject, bool> fadeAcc = new Dictionary<GameObject, bool>();
 
     void Awake()
     {
@@ -38,7 +35,6 @@ public class TargetController : NetworkBehaviour {
         this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
         this.lastTarget = new Stack<GameObject>();
-        this.stateMachine = new ZoomStateMachine();
         this.target = this.initPos;
 	}
 	
