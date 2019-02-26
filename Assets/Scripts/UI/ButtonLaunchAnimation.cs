@@ -9,8 +9,6 @@ public class ButtonLaunchAnimation : MonoBehaviour, ButtonAction
 
     public void MakeAction(Player player)
     {
-        int iTrigger = Animator.StringToHash(trigger);
-        Animator anim = objectToAnimate.GetComponent<Animator>();
-        anim.SetTrigger(iTrigger);
+        player.CmdAnimate(objectToAnimate, trigger);
     }
 }

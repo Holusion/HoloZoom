@@ -56,6 +56,11 @@ public class Player : NetworkBehaviour {
         RpcEnable(go, enable);
     }
 
+    [Command]
+    public void CmdAnimate(GameObject go, string trigger) {
+        RpcAnimate(go, trigger);
+    }
+
     [ClientRpc]
     public void RpcTarget(string action, GameObject hit) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
@@ -96,5 +101,12 @@ public class Player : NetworkBehaviour {
     public void RpcEnable(GameObject go, bool enable) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
         controller.Enable(go, enable);
+    }
+
+    [ClientRpc]
+    public void RpcAnimate(GameObject go, string trigger) {
+        int iTrigger = Animator.StringToHash(trigger);
+        Animator anim = go.GetComponent<Animator>();
+        anim.SetTrigger(iTrigger);
     }
 }
