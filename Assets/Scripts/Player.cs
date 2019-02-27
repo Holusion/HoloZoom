@@ -64,6 +64,7 @@ public class Player : NetworkBehaviour {
     [ClientRpc]
     public void RpcTarget(string action, GameObject hit) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        Debug.Log("test");
 
         if(action == SELECT) {
             controller.SetTarget(hit);
