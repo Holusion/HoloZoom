@@ -8,7 +8,6 @@ public class ButtonSelection : MonoBehaviour, ButtonAction
 
     public void MakeAction(Player player)
     {
-        selectedGameObject.SetActive(true);
         player.CmdTargets(Player.SELECT, new string[] {selectedGameObject.name});
     }
 }

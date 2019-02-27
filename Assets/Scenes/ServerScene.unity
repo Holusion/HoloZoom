@@ -184,7 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSelectable:
-  - {fileID: 1252161795}
+  - gameObject: {fileID: 1252161795}
+    initActive: 0
 --- !u!1 &47771067
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,9 +243,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSelectable:
-  - {fileID: 23690004}
-  - {fileID: 1500086397}
-  - {fileID: 1349938941}
+  - gameObject: {fileID: 1349938941}
+    initActive: 1
+  - gameObject: {fileID: 23690004}
+    initActive: 1
+  - gameObject: {fileID: 1500086397}
+    initActive: 1
 --- !u!1 &105929786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3091,7 +3095,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSelectable:
-  - {fileID: 1536460129}
+  - gameObject: {fileID: 1536460129}
+    initActive: 1
 --- !u!1 &1383308616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,7 +3511,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSelectable:
-  - {fileID: 1349883368}
+  - gameObject: {fileID: 1349883368}
+    initActive: 1
 --- !u!65 &1536460133
 BoxCollider:
   m_ObjectHideFlags: 0
