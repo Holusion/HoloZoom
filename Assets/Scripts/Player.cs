@@ -64,7 +64,6 @@ public class Player : NetworkBehaviour {
     [ClientRpc]
     public void RpcTarget(string action, GameObject hit) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
-        Debug.Log("test");
 
         if(action == SELECT) {
             controller.SetTarget(hit);
@@ -79,7 +78,7 @@ public class Player : NetworkBehaviour {
         GameObject selected = null;
 
         foreach(string s in hit) {
-            selected = controller.target.GetComponent<Activator>().nextSelectable.Find(x => x.name == s);
+            selected = controller.target.GetComponent<Activator>().nextSelectable.Find(x => x.gameObject.name == s).gameObject;
             if(selected != null) {
                 break;
             }

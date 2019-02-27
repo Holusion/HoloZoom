@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Activator : MonoBehaviour
 {
-    public List<GameObject> nextSelectable;
+    [System.Serializable]
+    public struct ActivatorObject {
+        public GameObject gameObject;
+        public bool initActive;
+    }
+    public List<ActivatorObject> nextSelectable;
 }

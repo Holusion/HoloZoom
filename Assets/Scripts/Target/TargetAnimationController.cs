@@ -13,27 +13,27 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
         anim.SetTrigger(trigger);
     }
 
-    void FadeIn(GameObject go, int trigger) {
-        go.SetActive(true);
+    void FadeIn(Activator.ActivatorObject ao, int trigger) {
+        ao.gameObject.SetActive(ao.initActive);
 
-        Activator activator = go.GetComponent<Activator>();
+        Activator activator = ao.gameObject.GetComponent<Activator>();
         if(activator != null) {
-            foreach(GameObject goActivator in activator.nextSelectable) {
-                FadeIn(goActivator, trigger);
+            foreach(Activator.ActivatorObject child in activator.nextSelectable) {
+                FadeIn(child, trigger);
             }
         }
     }
 
-    void FadeOut(GameObject go, int trigger) {
-        Animator anim = go.GetComponent<Animator>();
+    void FadeOut(Activator.ActivatorObject ao, int trigger) {
+        Animator anim = ao.gameObject.GetComponent<Animator>();
         if(anim != null) {
             anim.SetTrigger(trigger);
         }
 
-        Activator activator = go.GetComponent<Activator>();
+        Activator activator = ao.gameObject.GetComponent<Activator>();
         if(activator != null) {
-            foreach(GameObject goActivator in activator.nextSelectable) {
-                FadeOut(goActivator, trigger);
+            foreach(Activator.ActivatorObject child in activator.nextSelectable) {
+                FadeOut(child, trigger);
             }
         }
     }
@@ -42,9 +42,9 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
     {
         int trigger = Animator.StringToHash("Close");
         Activator activator = previousTarget.GetComponent<Activator>();
-        foreach(GameObject go in activator.nextSelectable) {
-            if(go != this.gameObject) {
-                FadeOut(go, trigger);
+        foreach(Activator.ActivatorObject ao in activator.nextSelectable) {
+            if(ao.gameObject != this.gameObject) {
+                FadeOut(ao, trigger);
             }
         }
 
@@ -58,9 +58,9 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
     {
         int trigger = Animator.StringToHash("Open");
         Activator activator = previousTarget.GetComponent<Activator>();
-        foreach(GameObject go in activator.nextSelectable) {
-            if(go != this.gameObject) {
-                FadeIn(go, trigger);
+        foreach(Activator.ActivatorObject ao in activator.nextSelectable) {
+            if(ao.gameObject != this.gameObject) {
+                FadeIn(ao, trigger);
             }
         }
 

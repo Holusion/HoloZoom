@@ -69,7 +69,9 @@ public class TargetController : NetworkBehaviour {
 
     public void SetTarget(GameObject go, bool reset = false)
     {
-        if(this.lastTarget.Count == 0 && go != null || target.GetComponent<Activator>().nextSelectable.Contains(go) && !reset) {
+        int index = target.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == go); 
+
+        if(this.lastTarget.Count == 0 && go != null || index >= 0 && !reset) {
             targetChange = true;
             lastTarget.Push(this.target);
             this.target = go;
@@ -106,8 +108,8 @@ public class TargetController : NetworkBehaviour {
                 answer.OnRotate();
             }
         } else {
-            foreach(GameObject go in this.target.GetComponent<Activator>().nextSelectable) {
-                rotateAroundPoint += go.transform.position;
+            foreach(Activator.ActivatorObject ao in this.target.GetComponent<Activator>().nextSelectable) {
+                rotateAroundPoint += ao.gameObject.transform.position;
             }
             rotateAroundPoint /= this.target.GetComponent<Activator>().nextSelectable.Count;
         }
