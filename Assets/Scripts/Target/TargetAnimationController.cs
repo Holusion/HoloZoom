@@ -15,10 +15,6 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
 
     void FadeIn(GameObject go, int trigger) {
         go.SetActive(true);
-        Animator anim = go.GetComponent<Animator>();
-        if(anim != null) {
-            anim.SetTrigger(trigger);
-        }
 
         Activator activator = go.GetComponent<Activator>();
         if(activator != null) {
@@ -68,11 +64,7 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
             }
         }
 
-        Animator previousTargetAnim = previousTarget.GetComponent<Animator>();
         previousTarget.SetActive(true);
-        if(previousTargetAnim != null) {
-            previousTargetAnim.SetTrigger(trigger);
-        }
     }
 
     public void OnDesactive() {
