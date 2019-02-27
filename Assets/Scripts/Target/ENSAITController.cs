@@ -27,6 +27,8 @@ public class ENSAITController : TargetAnimationController, ITargetAnswer
         base.OnUnselected(previousTarget);
 
         elecButton.gameObject.SetActive(false);
+        reset.gameObject.SetActive(false);
+
         Animator anim = this.gameObject.GetComponent<Animator>();
         int trigger = Animator.StringToHash("Open");
         anim.SetTrigger(trigger);
