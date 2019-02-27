@@ -99,8 +99,6 @@ public class Player : NetworkBehaviour {
 
     [ClientRpc]
     public void RpcEnable(GameObject go, bool enable) {
-        Debug.Log(go);
-
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
         controller.Enable(go, enable);
     }

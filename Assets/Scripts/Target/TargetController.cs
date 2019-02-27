@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TargetController : NetworkBehaviour {
+public class TargetController : MonoBehaviour {
 
     public GameObject interactiveTarget;
     public GameObject target;
