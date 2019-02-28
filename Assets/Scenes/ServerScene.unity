@@ -2756,6 +2756,7 @@ MonoBehaviour:
   interactions:
   - {fileID: 11400000, guid: 3aac2bbed04958a42b774137b49fadb7, type: 2}
   - {fileID: 11400000, guid: c147d991dcbb154aba11dcf85b86b710, type: 2}
+  - {fileID: 11400000, guid: 4abc19d7976bc5c37bf9d09d023cf946, type: 2}
 --- !u!4 &1307520463
 Transform:
   m_ObjectHideFlags: 0
