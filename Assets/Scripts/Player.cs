@@ -63,50 +63,60 @@ public class Player : NetworkBehaviour {
 
     [ClientRpc]
     public void RpcTarget(string action, GameObject hit) {
-        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        if(this.isLocalPlayer) {
+            TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
 
-        if(action == SELECT) {
-            controller.SetTarget(hit);
-        } else if (action == UNSELECT) {
-            controller.SetTarget(null, true);
+            if(action == SELECT) {
+                controller.SetTarget(hit);
+            } else if (action == UNSELECT) {
+                controller.SetTarget(null, true);
+            }
         }
     }
 
     [ClientRpc]
     public void RpcTargets(string action, string[] hit) {
-        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
-        GameObject selected = null;
+        if(this.isLocalPlayer) {
+            TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+            GameObject selected = null;
 
-        foreach(string s in hit) {
-            selected = controller.target.GetComponent<Activator>().nextSelectable.Find(x => x.gameObject.name == s).gameObject;
-            if(selected != null) {
-                break;
+            foreach(string s in hit) {
+                selected = controller.target.GetComponent<Activator>().nextSelectable.Find(x => x.gameObject.name == s).gameObject;
+                if(selected != null) {
+                    break;
+                }
             }
-        }
 
-        if(action == SELECT && selected != null) {
-            controller.SetTarget(selected);
-        } else if (action == UNSELECT) {
-            controller.SetTarget(null, true);
+            if(action == SELECT && selected != null) {
+                controller.SetTarget(selected);
+            } else if (action == UNSELECT) {
+                controller.SetTarget(null, true);
+            }
         }
     }
 
     [ClientRpc]
     public void RpcRotate(float speed) {
-        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
-        controller.RotateTarget(speed);
+        if(this.isLocalPlayer) {
+            TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+            controller.RotateTarget(speed);
+        }
     }
 
     [ClientRpc]
     public void RpcEnable(GameObject go, bool enable) {
-        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
-        controller.Enable(go, enable);
+        if(this.isLocalPlayer) {
+            TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+            controller.Enable(go, enable);
+        }
     }
 
     [ClientRpc]
     public void RpcAnimate(GameObject go, string trigger) {
-        int iTrigger = Animator.StringToHash(trigger);
-        Animator anim = go.GetComponent<Animator>();
-        anim.SetTrigger(iTrigger);
+        if(this.isLocalPlayer) {
+            int iTrigger = Animator.StringToHash(trigger);
+            Animator anim = go.GetComponent<Animator>();
+            anim.SetTrigger(iTrigger);
+        }
     }
 }
