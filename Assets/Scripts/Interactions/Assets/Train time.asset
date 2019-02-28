@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Train time
   m_EditorClassIdentifier: 
   gameObjectName: GARE
-  city1: Tourcoing
-  city2: Courtrai
+  src1: Tourcoing
+  src2: Courtrai
   times:
-  - time: {x: 14, y: 37, z: 0}
+  - time: {x: 17, y: 10, z: 0}
     start: 1
-  - time: {x: 14, y: 38, z: 0}
+  - time: {x: 17, y: 11, z: 0}
     start: 0

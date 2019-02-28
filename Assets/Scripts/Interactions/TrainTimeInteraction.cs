@@ -11,10 +11,11 @@ public class TrainTimeInteraction : Interaction
         public bool start;
     }
     public string gameObjectName;
-    public string city1;
-    public string city2;
+    public string src1;
+    public string src2;
     public List<TrainSchedule> times;
-    private System.DateTime lastNow = System.DateTime.Now;
+    private Vector3 lastNow = new Vector3(-1,-1,-1);
+    private long previous = 0L;
 
     public TrainTimeInteraction()
     {
@@ -29,12 +30,17 @@ public class TrainTimeInteraction : Interaction
     public override void UpdateInteraction(Player player)
     {
         System.DateTime now = System.DateTime.Now;
+        Vector3 nowTime = new Vector3(now.Hour, now.Minute, now.Second);
 
-        if(times.Exists(schedule => schedule.time == new Vector3(now.Hour, now.Minute, now.Second)) && now != lastNow) {
-            TrainSchedule ts = times.Find(schedule => schedule.time == new Vector3(now.Hour, now.Minute, now.Second));
-            string city = ts.start ? city2 : city1;
-            Debug.Log("Le train de " + ts.time.x + ":" + ts.time.y + " à destination de " + city + " arrive en gare");
-            now = lastNow;
+        if(times.Exists(schedule => schedule.time == nowTime) && lastNow != nowTime) {
+            TrainSchedule ts = times.Find(schedule => schedule.time == nowTime);
+            string dest = ts.start ? src2 : src1;
+            string src = ts.start ? src1 : src2;
+            Debug.Log("Le train de " + ts.time.x + ":" + ts.time.y + " à destination de " + dest + " arrive en gare");
+
+            player.CmdAnimate(GameObject.Find(gameObjectName), src);
+            
+            lastNow = nowTime;
         }
     }
 }
