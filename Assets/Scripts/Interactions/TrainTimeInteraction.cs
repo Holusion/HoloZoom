@@ -55,9 +55,11 @@ public class TrainTimeInteraction : Interaction
     private void LaunchTrain(Player player, string src, string dest, Vector3 nowTime) {
         string message = "Le train de " + nowTime.x + ":" + nowTime.y + " à destination de " + dest + " arrive en gare";
         GameObject gameObject = GameObject.Find(gameObjectName);
-        gameObject.transform.Find("GareInfo").Find("Canvas").Find("Text").GetComponent<Text>().text = message;
+        if(gameObject) {
+            gameObject.transform.Find("GareInfo").Find("Canvas").Find("Text").GetComponent<Text>().text = message;
 
-        player.CmdAnimate(gameObject, src);
+            player.CmdAnimate(gameObject, src);
+        }
         lastNow = nowTime;
     }
 }
