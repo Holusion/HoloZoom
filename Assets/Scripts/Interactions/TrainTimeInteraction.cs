@@ -14,6 +14,7 @@ public class TrainTimeInteraction : Interaction
     public string gameObjectName;
     public string src1;
     public string src2;
+    public bool repeatSchedule = false;
     public List<TrainSchedule> times;
     private Vector3 lastNow = new Vector3(-1,-1,-1);
     private long previous = 0L;
@@ -33,18 +34,30 @@ public class TrainTimeInteraction : Interaction
         System.DateTime now = System.DateTime.Now;
         Vector3 nowTime = new Vector3(now.Hour, now.Minute, now.Second);
 
-        if(times.Exists(schedule => schedule.time == nowTime) && lastNow != nowTime) {
-            TrainSchedule ts = times.Find(schedule => schedule.time == nowTime);
-            string dest = ts.start ? src2 : src1;
-            string src = ts.start ? src1 : src2;
+        if(repeatSchedule) {
+            if(nowTime.y % 4 == 0 && lastNow.y != nowTime.y) {
+                LaunchTrain(player, src2, src1, nowTime);
+            } else if(nowTime.y % 5 == 0 && lastNow.y != nowTime.y) {
+                LaunchTrain(player, src1, src2, nowTime);
+            }
+        } else {
+            if(times.Exists(schedule => schedule.time == nowTime) && lastNow != nowTime) {
+                TrainSchedule ts = times.Find(schedule => schedule.time == nowTime);
+                string dest = ts.start ? src2 : src1;
+                string src = ts.start ? src1 : src2;
 
-            GameObject gameObject = GameObject.Find(gameObjectName);
-            string message = "Le train de " + ts.time.x + ":" + ts.time.y + " à destination de " + dest + " arrive en gare";
-            gameObject.transform.Find("GareInfo").Find("Canvas").Find("Text").GetComponent<Text>().text = message;
-
-            player.CmdAnimate(gameObject, src);
-            
-            lastNow = nowTime;
+                LaunchTrain(player, src, dest, nowTime);
+            }
         }
+
+    }
+
+    private void LaunchTrain(Player player, string src, string dest, Vector3 nowTime) {
+        string message = "Le train de " + nowTime.x + ":" + nowTime.y + " à destination de " + dest + " arrive en gare";
+        GameObject gameObject = GameObject.Find(gameObjectName);
+        gameObject.transform.Find("GareInfo").Find("Canvas").Find("Text").GetComponent<Text>().text = message;
+
+        player.CmdAnimate(gameObject, src);
+        lastNow = nowTime;
     }
 }

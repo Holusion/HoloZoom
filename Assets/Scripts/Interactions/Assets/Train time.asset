@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Train time
   m_EditorClassIdentifier: 
   gameObjectName: GARE
-  src1: Roubaix
+  src1: Lille Flandre
   src2: Courtrai
+  repeatSchedule: 1
   times:
   - time: {x: 6, y: 15, z: 0}
     start: 0
@@ -88,5 +89,5 @@ MonoBehaviour:
     start: 1
   - time: {x: 22, y: 18, z: 0}
     start: 0
-  - time: {x: 10, y: 50, z: 0}
-    start: 0
+  - time: {x: 15, y: 40, z: 0}
+    start: 1
