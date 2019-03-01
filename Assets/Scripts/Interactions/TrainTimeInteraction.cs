@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName="Train time", menuName="Interactions/Train time")]
 public class TrainTimeInteraction : Interaction
@@ -36,9 +37,13 @@ public class TrainTimeInteraction : Interaction
             TrainSchedule ts = times.Find(schedule => schedule.time == nowTime);
             string dest = ts.start ? src2 : src1;
             string src = ts.start ? src1 : src2;
+
+            GameObject gameObject = GameObject.Find(gameObjectName);
+            string message = "Le train de " + ts.time.x + ":" + ts.time.y + " à destination de " + dest + " arrive en gare";
+            gameObject.transform.Find("GareInfo").Find("Canvas").Find("Text").GetComponent<Text>().text = message;
             Debug.Log("Le train de " + ts.time.x + ":" + ts.time.y + " à destination de " + dest + " arrive en gare");
 
-            player.CmdAnimate(GameObject.Find(gameObjectName), src);
+            player.CmdAnimate(gameObject, src);
             
             lastNow = nowTime;
         }
