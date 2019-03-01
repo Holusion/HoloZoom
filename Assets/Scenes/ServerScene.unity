@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayInterval: 0.02
-  maxDistance: 0.5
+  maxDistance: 0.2
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
