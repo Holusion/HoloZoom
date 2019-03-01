@@ -41,7 +41,6 @@ public class TrainTimeInteraction : Interaction
             GameObject gameObject = GameObject.Find(gameObjectName);
             string message = "Le train de " + ts.time.x + ":" + ts.time.y + " à destination de " + dest + " arrive en gare";
             gameObject.transform.Find("GareInfo").Find("Canvas").Find("Text").GetComponent<Text>().text = message;
-            Debug.Log("Le train de " + ts.time.x + ":" + ts.time.y + " à destination de " + dest + " arrive en gare");
 
             player.CmdAnimate(gameObject, src);
             
