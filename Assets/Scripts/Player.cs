@@ -8,10 +8,6 @@ public class Player : NetworkBehaviour {
 
     public const string BUTTON_LEFT = "Fire1";
     public const string BUTTON_RIGHT = "Fire2";
-    public const string SELECT = "select";
-    public const string UNSELECT = "unselect";
-    public const string ROTATE = "rotate";
-
     private float lastSpeed = 0;
 
     private InteractionManager interactionManager;
@@ -39,13 +35,18 @@ public class Player : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdTarget(string action, GameObject hit) {
-        RpcTarget(action, hit);
+    public void CmdTarget(GameObject hit) {
+        RpcTarget(hit);
     }
 
     [Command]
-    public void CmdTargets(string action, string[] hit) {
-        RpcTargets(action, hit);
+    public void CmdReset() {
+        RpcReset();
+    }
+
+    [Command]
+    public void CmdTargets(string[] hit) {
+        RpcTargets(hit);
     }
 
     [Command]
@@ -64,18 +65,19 @@ public class Player : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcTarget(string action, GameObject hit) {
+    public void RpcTarget(GameObject hit) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
-
-        if(action == SELECT) {
-            controller.SetTarget(hit);
-        } else if (action == UNSELECT) {
-            controller.SetTarget(null, true);
-        }
+        controller.SetTarget(hit);
     }
 
     [ClientRpc]
-    public void RpcTargets(string action, string[] hit) {
+    public void RpcReset() {
+        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        controller.Reset();
+    }
+
+    [ClientRpc]
+    public void RpcTargets(string[] hit) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
         GameObject selected = null;
 
@@ -86,10 +88,8 @@ public class Player : NetworkBehaviour {
             }
         }
 
-        if(action == SELECT && selected != null) {
+        if(selected != null) {
             controller.SetTarget(selected);
-        } else if (action == UNSELECT) {
-            controller.SetTarget(null, true);
         }
     }
 

@@ -21,11 +21,11 @@ public class ClickSelectionInteraction : Interaction
             for(int i = 0; i < gameObjectsNames.Length; i++) {
                 gameObjectsNames[i] = hits[i].collider.gameObject.name;
             }
-            player.CmdTargets(Player.SELECT, gameObjectsNames);
+            player.CmdTargets(gameObjectsNames);
         } 
         else if(Input.GetButtonDown(Player.BUTTON_RIGHT)) 
         {
-            player.CmdTarget(Player.UNSELECT, null);
+            player.CmdReset();
         } 
         else if(Input.GetButton(Player.BUTTON_LEFT) && speed != 0)
         {

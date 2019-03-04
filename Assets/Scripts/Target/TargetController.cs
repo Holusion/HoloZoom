@@ -12,7 +12,6 @@ public class TargetController : NetworkBehaviour {
     public float zoomSpeed = 5f;
     public float maxAngularSpeed = 10f;
     bool targetChange = false;
-    bool reset = true;
     Quaternion initRotation;
     Stack<GameObject> lastTarget;
     public GameObject initPos;
@@ -67,11 +66,11 @@ public class TargetController : NetworkBehaviour {
         }
     }
 
-    public void SetTarget(GameObject go, bool reset = false)
+    public void SetTarget(GameObject go)
     {
         int index = target.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == go); 
 
-        if(this.lastTarget.Count == 0 && go != null || index >= 0 && !reset) {
+        if(this.lastTarget.Count == 0 && go != null || index >= 0) {
             targetChange = true;
             lastTarget.Push(this.target);
             this.target = go;
@@ -79,7 +78,12 @@ public class TargetController : NetworkBehaviour {
             if(answer != null) {
                 answer.OnSelected(lastTarget.Peek());
             }
-        } else if(reset && this.lastTarget.Count > 0) {
+        }
+    }
+
+    public void Reset()
+    {
+        if(this.lastTarget.Count > 0) {
             GameObject previousTarget = lastTarget.Pop();
             ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
             if(answer != null) {
@@ -92,8 +96,6 @@ public class TargetController : NetworkBehaviour {
                 this.target.GetComponent<ITargetAnswer>().OnSelected(lastTarget.Peek());
             }
         }
-        
-        this.reset = reset;
     }
 
     public void RotateTarget(float speed)

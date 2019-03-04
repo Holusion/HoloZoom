@@ -6,6 +6,6 @@ public class ButtonReset : MonoBehaviour, ButtonAction
 {
     public void MakeAction(Player player)
     {
-        player.CmdTarget(Player.UNSELECT, null);
+        player.CmdReset();
     }
 }
