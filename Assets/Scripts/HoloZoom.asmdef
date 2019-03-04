@@ -1,0 +1,15 @@
+{
+    "name": "HoloZoom",
+    "references": [
+        "Unity.Postprocessing.Runtime",
+        "Unity.Postprocessing.Runtime.Tests"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

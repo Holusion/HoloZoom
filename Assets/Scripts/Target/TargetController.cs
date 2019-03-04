@@ -18,6 +18,21 @@ public class TargetController : NetworkBehaviour {
 
     public bool readyToRotate = false;
 
+    public void Construct() {
+        Vector3 position = this.transform.position;
+        Quaternion rotation = this.transform.rotation;
+
+        this.interactiveTarget = GameObject.Find("InteractiveObjects");
+        this.initPos = GameObject.Find("InitPos");
+
+        this.initRotation = transform.rotation;
+        this.interactiveTarget = GameObject.Find("InteractiveObjects");
+        this.initPos = GameObject.Find("InitPos");
+        this.target = initPos;
+        this.lastTarget = new Stack<GameObject>();
+        this.target = this.initPos;
+    }
+
     void Awake()
     {
         Vector3 position = this.transform.position;
