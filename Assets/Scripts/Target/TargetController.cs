@@ -22,15 +22,11 @@ public class TargetController : NetworkBehaviour {
         Vector3 position = this.transform.position;
         Quaternion rotation = this.transform.rotation;
 
-        this.interactiveTarget = GameObject.Find("InteractiveObjects");
-        this.initPos = GameObject.Find("InitPos");
-
         this.initRotation = transform.rotation;
         this.interactiveTarget = GameObject.Find("InteractiveObjects");
         this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
         this.lastTarget = new Stack<GameObject>();
-        this.target = this.initPos;
     }
 
     void Awake()
@@ -45,11 +41,8 @@ public class TargetController : NetworkBehaviour {
     // Use this for initialization
     void Start () {
         this.initRotation = transform.rotation;
-        this.interactiveTarget = GameObject.Find("InteractiveObjects");
-        this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
         this.lastTarget = new Stack<GameObject>();
-        this.target = this.initPos;
 	}
 	
 	// Update is called once per frame

@@ -8,6 +8,11 @@ public class Activator : MonoBehaviour
     public struct ActivatorObject {
         public GameObject gameObject;
         public bool initActive;
+
+        public ActivatorObject(GameObject gameObject, bool initActive) {
+            this.gameObject = gameObject;
+            this.initActive = initActive;
+        }
     }
     public List<ActivatorObject> nextSelectable;
 }
