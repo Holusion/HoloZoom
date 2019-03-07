@@ -82,9 +82,11 @@ public class TargetController : NetworkBehaviour {
             targetChange = true;
             lastTarget.Push(this.target);
             this.target = go;
-            ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
-            if(answer != null) {
-                answer.OnSelected(lastTarget.Peek());
+            ITargetAnswer[] answers = this.target.GetComponents<ITargetAnswer>();
+            foreach(ITargetAnswer answer in answers) {
+                if(answer != null) {
+                    answer.OnSelected(lastTarget.Peek());
+                }
             }
         }
     }
@@ -93,15 +95,20 @@ public class TargetController : NetworkBehaviour {
     {
         if(this.lastTarget.Count > 0) {
             GameObject previousTarget = lastTarget.Pop();
-            ITargetAnswer answer = this.target.GetComponent<ITargetAnswer>();
-            if(answer != null) {
-                answer.OnUnselected(previousTarget);
+            ITargetAnswer[] answers = this.target.GetComponents<ITargetAnswer>();
+            foreach(ITargetAnswer answer in answers) {
+                if(answer != null) {
+                    answer.OnUnselected(previousTarget);
+                }
             }
             targetChange = true;
             GameObject tmp = this.target;
             this.target = previousTarget;
             if(lastTarget.Count > 0) {
-                this.target.GetComponent<ITargetAnswer>().OnSelected(lastTarget.Peek());
+                ITargetAnswer[] newAnswers = this.target.GetComponents<ITargetAnswer>();
+                foreach(ITargetAnswer answer in newAnswers) {
+                    answer.OnSelected(lastTarget.Peek());
+                }
             }
         }
     }
@@ -113,9 +120,11 @@ public class TargetController : NetworkBehaviour {
 
         if(this.target.GetComponent<BoxCollider>() != null) {
             rotateAroundPoint = this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center);
-            ITargetAnswer answer = target.GetComponent<ITargetAnswer>();
-            if(answer != null) {
-                answer.OnRotate();
+            ITargetAnswer[] answers = target.GetComponents<ITargetAnswer>();
+            foreach(ITargetAnswer answer in answers) {
+                if(answer != null) {
+                    answer.OnRotate();
+                }
             }
         } else {
             foreach(Activator.ActivatorObject ao in this.target.GetComponent<Activator>().nextSelectable) {
@@ -135,9 +144,11 @@ public class TargetController : NetworkBehaviour {
     }
 
     public void Enable(GameObject go, bool enable) {
-        ITargetAnswer answer = go.GetComponent<ITargetAnswer>();
-        if(answer != null) {
-            answer.OnActive(enable);
+        ITargetAnswer[] answers = go.GetComponents<ITargetAnswer>();
+        foreach(ITargetAnswer answer in answers) {
+            if(answer != null) {
+                answer.OnActive(enable);
+            }
         }
     }
 }

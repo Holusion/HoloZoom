@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 65208446610017712}
   - component: {fileID: 114387826059453932}
   - component: {fileID: 427323402535983161}
-  - component: {fileID: 5534047097192770019}
+  - component: {fileID: 1108250970113734404}
   m_Layer: 0
   m_Name: ENSAIT
   m_TagString: Selectable
@@ -161,7 +161,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5534047097192770019
+--- !u!114 &1108250970113734404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,11 +170,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1542440502829860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf10996e21c7fbd0e8a031712a9c5a02, type: 3}
+  m_Script: {fileID: 11500000, guid: e28271bf8eb722b6a853daebc47615fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elecButton: {fileID: 0}
-  reset: {fileID: 0}
+  actionPanel: {fileID: 0}
 --- !u!1001 &1727958156515583736
 PrefabInstance:
   m_ObjectHideFlags: 0
