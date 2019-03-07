@@ -5,33 +5,25 @@ using UnityEngine.UI;
 
 public class ENSAITController : TargetAnimationController, ITargetAnswer
 {
-    public Button elecButton;
-    public Button resetButton;
-    public Button machineButton;
+    private Button elecButton;
+    private Button machineButton;
+
+    public GameObject actionPanel;
+
+    void Start() {
+        Transform background = actionPanel.transform.Find("Panel").Find("Background");
+        elecButton = background.Find("ENSAIT_Elec").GetComponent<Button>();
+        machineButton = background.Find("ENSAIT_Machine").GetComponent<Button>();
+    }
 
     public new void OnSelected(GameObject previousTarget) {
         base.OnSelected(previousTarget);
-
-        elecButton.gameObject.SetActive(true);
-        machineButton.gameObject.SetActive(true);
-
-        elecButton.onClick.AddListener(() => {
-            resetButton.gameObject.SetActive(true);
-            elecButton.gameObject.SetActive(false);
-        });
-
-        resetButton.onClick.AddListener(() => {
-            elecButton.gameObject.SetActive(true);
-            resetButton.gameObject.SetActive(false);
-        });
+        actionPanel.SetActive(true);
     }
 
     public new void OnUnselected(GameObject previousTarget) {
         base.OnUnselected(previousTarget);
-
-        elecButton.gameObject.SetActive(false);
-        resetButton.gameObject.SetActive(false);
-        machineButton.gameObject.SetActive(false);
+        actionPanel.SetActive(false);
 
         Animator anim = this.gameObject.GetComponent<Animator>();
         int trigger = Animator.StringToHash("Open");
@@ -40,9 +32,6 @@ public class ENSAITController : TargetAnimationController, ITargetAnswer
 
     public new void OnDesactive() {
         base.OnDesactive();
-
-        elecButton.gameObject.SetActive(false);
-        resetButton.gameObject.SetActive(false);
-        machineButton.gameObject.SetActive(false);
+        actionPanel.SetActive(false);
     }
 }
