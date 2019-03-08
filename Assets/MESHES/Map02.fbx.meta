@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: 6c88df67814d1e54db8c705474bf3982
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: SVGMat
+    2100002: SVGMat.049
+    2100004: SVGMat.061
+    2100006: SVGMat.060
+    2100008: SVGMat.059
+    2100010: SVGMat.058
+    2100012: SVGMat.057
+    2100014: SVGMat.056
+    2100016: SVGMat.055
+    2100018: SVGMat.054
+    2100020: SVGMat.053
+    2100022: SVGMat.052
+    2100024: SVGMat.051
+    2100026: SVGMat.050
+    2100028: SVGMat.048
+    2100030: SVGMat.047
+    2100032: SVGMat.046
+    2100034: SVGMat.045
+    2100036: SVGMat.044
+    2100038: SVGMat.043
+    2100040: SVGMat.042
+    2100042: SVGMat.041
+    2100044: SVGMat.040
+    2100046: SVGMat.039
+    2100048: SVGMat.038
+    2100050: SVGMat.037
+    2100052: SVGMat.036
+    2100054: SVGMat.035
+    2100056: SVGMat.034
+    2100058: SVGMat.033
+    2100060: SVGMat.032
+    2100062: SVGMat.031
+    2100064: SVGMat.030
+    2100066: SVGMat.029
+    2100068: SVGMat.028
+    2100070: SVGMat.027
+    2100072: SVGMat.026
+    2100074: SVGMat.025
+    2100076: SVGMat.024
+    2100078: SVGMat.023
+    2100080: SVGMat.022
+    2100082: SVGMat.021
+    2100084: SVGMat.020
+    2100086: SVGMat.019
+    2100088: SVGMat.018
+    2100090: SVGMat.017
+    2100092: SVGMat.016
+    2100094: SVGMat.015
+    2100096: SVGMat.014
+    2100098: SVGMat.013
+    2100100: SVGMat.012
+    2100102: SVGMat.011
+    2100104: SVGMat.010
+    2100106: SVGMat.009
+    2100108: SVGMat.008
+    2100110: SVGMat.007
+    2100112: SVGMat.006
+    2100114: SVGMat.005
+    2100116: SVGMat.004
+    2100118: SVGMat.003
+    2100120: SVGMat.002
+    2100122: SVGMat.001
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Curve.083
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
