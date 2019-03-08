@@ -15,7 +15,6 @@ public class TargetController : NetworkBehaviour {
     Quaternion initRotation;
     Stack<GameObject> lastTarget;
     public GameObject initPos;
-
     public bool readyToRotate = false;
 
     public void Construct() {
@@ -53,6 +52,7 @@ public class TargetController : NetworkBehaviour {
             Vector3 targetPosition;
             Quaternion toRotation;
             float targetFieldView = 60;
+            float targetFarPlane = 5;
 
             if(target.GetComponent<BoxCollider>() != null) {
                 direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;
@@ -62,6 +62,7 @@ public class TargetController : NetworkBehaviour {
                 targetPosition = target.transform.position;
                 toRotation = initRotation;
                 targetFieldView = 8;
+                targetFarPlane = 500;
             }
 
             this.transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
@@ -70,6 +71,7 @@ public class TargetController : NetworkBehaviour {
             float distance = Vector3.Distance(transform.position, targetPosition);
             transform.position = Vector3.Lerp(transform.position,targetPosition, zoomSpeed * Time.deltaTime);
             Camera.main.fieldOfView += (targetFieldView - Camera.main.fieldOfView) / (distance + 1);
+            Camera.main.farClipPlane += (targetFarPlane - Camera.main.farClipPlane) / (distance + 1);
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
@@ -86,12 +88,6 @@ public class TargetController : NetworkBehaviour {
         if(this.lastTarget.Count == 0 && go != null || index >= 0) {
             targetChange = true;
             lastTarget.Push(this.target);
-            // ITargetAnswer[] previousAnswer = this.target.GetComponents<ITargetAnswer>();
-            // foreach(ITargetAnswer answer in previousAnswer) {
-            //     if(answer != null) {
-            //         answer.OnUnselected(lastTarget.Peek());
-            //     }
-            // }
 
             this.target = go;
             ITargetAnswer[] answers = this.target.GetComponents<ITargetAnswer>();
