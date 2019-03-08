@@ -85,7 +85,7 @@ public class TargetController : NetworkBehaviour {
     {
         int index = target.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == go); 
 
-        if(this.lastTarget.Count == 0 && go != null || index >= 0) {
+        if(index >= 0) {
             targetChange = true;
             lastTarget.Push(this.target);
 

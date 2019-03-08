@@ -14,15 +14,17 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
     }
 
     public void OnSelected(GameObject previousTarget) {
-        if(previousTarget == GameObject.Find("InitPos")) {
-            initPanel.SetActive(false);
+        ActionPanelController previousActionPanel = previousTarget.GetComponent<ActionPanelController>();
+        if(previousActionPanel != null) {
+            previousActionPanel.actionPanel.SetActive(false);
         }
         actionPanel.SetActive(true);
     }
 
     public void OnUnselected(GameObject previousTarget) {
-        if(previousTarget == GameObject.Find("InitPos")) {
-            initPanel.SetActive(true);
+        ActionPanelController previousActionPanel = previousTarget.GetComponent<ActionPanelController>();
+        if(previousActionPanel != null) {
+            previousActionPanel.actionPanel.SetActive(true);
         }
         actionPanel.SetActive(false);
     }
