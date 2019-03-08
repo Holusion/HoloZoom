@@ -1807,7 +1807,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>/</b>
+  m_Text: Holozoom by <b>Holusion</b>
 --- !u!222 &604021651
 CanvasRenderer:
   m_ObjectHideFlags: 0

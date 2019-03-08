@@ -24,14 +24,21 @@ public class TreeController : MonoBehaviour, ITargetAnswer
 
     public void OnSelected(GameObject previousTarget)
     {
+        if(previousTarget == GameObject.Find("InitPos")) {
+            treeUI.text = "";
+        }
         int index = this.gameObject.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == previousTarget); 
         if(index < 0) {
-            treeUI.text += this.name + "<b>/</b>";
+            treeUI.text += "<b>/</b>" + this.name;
         }
     }
 
     public void OnUnselected(GameObject previouslastTarget)
     {
-        treeUI.text = treeUI.text.Replace(this.name + "<b>/</b>", "");
+        if(previouslastTarget == GameObject.Find("InitPos")) {
+            treeUI.text = "Holozoom by <b>Holusion</b>";
+        } else {
+            treeUI.text = treeUI.text.Replace("<b>/</b>" + this.name, "");
+        }
     }
 }
