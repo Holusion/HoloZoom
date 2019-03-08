@@ -86,6 +86,13 @@ public class TargetController : NetworkBehaviour {
         if(this.lastTarget.Count == 0 && go != null || index >= 0) {
             targetChange = true;
             lastTarget.Push(this.target);
+            // ITargetAnswer[] previousAnswer = this.target.GetComponents<ITargetAnswer>();
+            // foreach(ITargetAnswer answer in previousAnswer) {
+            //     if(answer != null) {
+            //         answer.OnUnselected(lastTarget.Peek());
+            //     }
+            // }
+
             this.target = go;
             ITargetAnswer[] answers = this.target.GetComponents<ITargetAnswer>();
             foreach(ITargetAnswer answer in answers) {
@@ -112,7 +119,7 @@ public class TargetController : NetworkBehaviour {
             if(lastTarget.Count > 0) {
                 ITargetAnswer[] newAnswers = this.target.GetComponents<ITargetAnswer>();
                 foreach(ITargetAnswer answer in newAnswers) {
-                    answer.OnSelected(lastTarget.Peek());
+                    answer.OnSelected(tmp);
                 }
             }
         }

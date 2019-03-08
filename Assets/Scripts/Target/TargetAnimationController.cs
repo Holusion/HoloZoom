@@ -48,10 +48,14 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
             }
         }
 
-        Animator previousTargetAnim = previousTarget.GetComponent<Animator>();
-        if(previousTargetAnim != null) {
-            previousTargetAnim.SetTrigger(trigger);
+        int index = this.gameObject.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == previousTarget); 
+        if(index < 0) {
+            Animator previousTargetAnim = previousTarget.GetComponent<Animator>();
+            if(previousTargetAnim != null) {
+                previousTargetAnim.SetTrigger(trigger);
+            }
         }
+
     }
 
     public void OnUnselected(GameObject previousTarget)
