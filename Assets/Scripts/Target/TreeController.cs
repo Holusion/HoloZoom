@@ -24,7 +24,6 @@ public class TreeController : MonoBehaviour, ITargetAnswer
 
     public void OnSelected(GameObject previousTarget)
     {
-        Debug.Log(previousTarget);
         int index = this.gameObject.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == previousTarget); 
         if(index < 0) {
             treeUI.text += this.name + "<b>/</b>";

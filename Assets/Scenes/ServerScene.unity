@@ -138,6 +138,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &23690006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23690004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6dc453b4961ec858db3ce7697a2c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &23690010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1518,7 +1530,8 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 1d9eab5ca707ae278b8eb6d70d7298ad, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114170969252695378, guid: 2ad800f0fe3e8f641828ac22c988f204, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2ad800f0fe3e8f641828ac22c988f204, type: 3}
 --- !u!1 &419753374
 GameObject:
@@ -3674,7 +3687,7 @@ PrefabInstance:
     - target: {fileID: 347481479322821302, guid: 0b712885bff8d1541a37bbc052b18626,
         type: 3}
       propertyPath: m_Name
-      value: Hygrometre Variant
+      value: Hygrometre
       objectReference: {fileID: 0}
     - target: {fileID: 347481479322821302, guid: 0b712885bff8d1541a37bbc052b18626,
         type: 3}
@@ -4312,6 +4325,31 @@ MonoBehaviour:
     i15: 38
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &1252161801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252161795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6dc453b4961ec858db3ce7697a2c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1252161802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252161795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8179dfbbc66b9fc5c935fb424fabcc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treeUI: {fileID: 604021650}
 --- !u!1 &1307520461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4835,6 +4873,18 @@ MonoBehaviour:
   nextSelectable:
   - gameObject: {fileID: 1536460129}
     initActive: 1
+--- !u!114 &1349938945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349938941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6dc453b4961ec858db3ce7697a2c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1349938947
 MonoBehaviour:
   m_ObjectHideFlags: 0

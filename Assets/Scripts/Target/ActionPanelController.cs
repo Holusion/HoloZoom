@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionPanelController : TargetAnimationController, ITargetAnswer
+public class ActionPanelController : MonoBehaviour, ITargetAnswer
 {
     public GameObject actionPanel;
 
@@ -11,18 +11,23 @@ public class ActionPanelController : TargetAnimationController, ITargetAnswer
         Transform background = actionPanel.transform.Find("Panel").Find("Background");
     }
 
-    public new void OnSelected(GameObject previousTarget) {
-        base.OnSelected(previousTarget);
+    public void OnSelected(GameObject previousTarget) {
         actionPanel.SetActive(true);
     }
 
-    public new void OnUnselected(GameObject previousTarget) {
-        base.OnUnselected(previousTarget);
+    public void OnUnselected(GameObject previousTarget) {
         actionPanel.SetActive(false);
     }
 
-    public new void OnDesactive() {
-        base.OnDesactive();
+    public void OnDesactive() {
         actionPanel.SetActive(false);
+    }
+
+    public void OnActive(bool enable)
+    {
+    }
+
+    public void OnRotate()
+    {
     }
 }
