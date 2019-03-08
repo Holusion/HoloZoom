@@ -52,7 +52,7 @@ public class TargetController : NetworkBehaviour {
             Vector3 targetPosition;
             Quaternion toRotation;
             float targetFieldView = 60;
-            float targetFarPlane = 5;
+            float targetFarPlane = 8;
 
             if(target.GetComponent<BoxCollider>() != null) {
                 direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;

@@ -13369,6 +13369,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleText
       objectReference: {fileID: 0}
+    - target: {fileID: 461659887579531068, guid: f3f1a2cf2804035b4bcdc9788dd8ef1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 461659887579531069, guid: f3f1a2cf2804035b4bcdc9788dd8ef1f,
         type: 3}
       propertyPath: m_LocalPosition.x
