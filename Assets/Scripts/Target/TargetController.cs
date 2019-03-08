@@ -52,6 +52,7 @@ public class TargetController : NetworkBehaviour {
             Vector3 direction;
             Vector3 targetPosition;
             Quaternion toRotation;
+            float targetFieldView = 60;
 
             if(target.GetComponent<BoxCollider>() != null) {
                 direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;
@@ -60,12 +61,16 @@ public class TargetController : NetworkBehaviour {
             } else {
                 targetPosition = target.transform.position;
                 toRotation = initRotation;
+                targetFieldView = 8;
             }
 
             this.transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             this.readyToRotate = false;
 
+            float distance = Vector3.Distance(transform.position, targetPosition);
             transform.position = Vector3.Lerp(transform.position,targetPosition, zoomSpeed * Time.deltaTime);
+            Camera.main.fieldOfView += (targetFieldView - Camera.main.fieldOfView) / (distance + 1);
+
             if (Vector3.Distance(transform.position, targetPosition) < 0.1 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
                 targetChange = false;
