@@ -60,8 +60,8 @@ public class Player : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdAnimate(GameObject go, string trigger) {
-        RpcAnimate(go, trigger);
+    public void CmdAnimate(GameObject go, string triggerOn, string triggerOff, bool shouldStack) {
+        RpcAnimate(go, triggerOn, triggerOff, shouldStack);
     }
 
     [ClientRpc]
@@ -106,8 +106,8 @@ public class Player : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcAnimate(GameObject go, string trigger) {
+    public void RpcAnimate(GameObject go, string triggerOn, string triggerOff, bool shouldStack) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
-        controller.Animate(go, trigger);
+        controller.Animate(go, triggerOn, triggerOff, shouldStack);
     }
 }

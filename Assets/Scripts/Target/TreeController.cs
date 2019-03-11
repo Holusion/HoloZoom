@@ -29,7 +29,7 @@ public class TreeController : MonoBehaviour, ITargetAnswer
         }
         int index = this.gameObject.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == previousTarget); 
         if(index < 0) {
-            treeUI.text += "<b>/</b>" + this.name;
+            Push(this.name);
         }
     }
 
@@ -38,7 +38,15 @@ public class TreeController : MonoBehaviour, ITargetAnswer
         if(previouslastTarget == GameObject.Find("InitPos")) {
             treeUI.text = "Holozoom by <b>Holusion</b>";
         } else {
-            treeUI.text = treeUI.text.Replace("<b>/</b>" + this.name, "");
+            Pop(this.name);
         }
+    }
+
+    public void Push(string path) {
+        treeUI.text += "<b>/</b>" + path;
+    }
+
+    public void Pop(string path) {
+        treeUI.text = treeUI.text.Replace("<b>/</b>" + path, "");
     }
 }

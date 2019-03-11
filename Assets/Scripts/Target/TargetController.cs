@@ -11,9 +11,9 @@ public class TargetController : NetworkBehaviour {
     public float rotationSpeed = 0.1f;
     public float zoomSpeed = 5f;
     public float maxAngularSpeed = 10f;
-    bool targetChange = false;
+    public bool targetChange = false;
     Quaternion initRotation;
-    Stack<GameObject> lastTarget;
+    Stack<IDoUndo> lastTarget;
     public GameObject initPos;
     public bool readyToRotate = false;
 
@@ -25,7 +25,7 @@ public class TargetController : NetworkBehaviour {
         this.interactiveTarget = GameObject.Find("InteractiveObjects");
         this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
-        this.lastTarget = new Stack<GameObject>();
+        this.lastTarget = new Stack<IDoUndo>();
     }
 
     void Awake()
@@ -41,7 +41,7 @@ public class TargetController : NetworkBehaviour {
     void Start () {
         this.initRotation = transform.rotation;
         this.target = initPos;
-        this.lastTarget = new Stack<GameObject>();
+        this.lastTarget = new Stack<IDoUndo>();
 	}
 	
 	// Update is called once per frame
@@ -83,41 +83,15 @@ public class TargetController : NetworkBehaviour {
 
     public void SetTarget(GameObject go)
     {
-        int index = target.GetComponent<Activator>().nextSelectable.FindIndex(ao => ao.gameObject == go); 
-
-        if(index >= 0) {
-            targetChange = true;
-            lastTarget.Push(this.target);
-
-            this.target = go;
-            ITargetAnswer[] answers = this.target.GetComponents<ITargetAnswer>();
-            foreach(ITargetAnswer answer in answers) {
-                if(answer != null) {
-                    answer.OnSelected(lastTarget.Peek());
-                }
-            }
-        }
+        IDoUndo command = new CommandSelection(this, go, this.target);
+        lastTarget.Push(command);
+        command.Do();
     }
 
     public void Reset()
     {
         if(this.lastTarget.Count > 0) {
-            GameObject previousTarget = lastTarget.Pop();
-            ITargetAnswer[] answers = this.target.GetComponents<ITargetAnswer>();
-            foreach(ITargetAnswer answer in answers) {
-                if(answer != null) {
-                    answer.OnUnselected(previousTarget);
-                }
-            }
-            targetChange = true;
-            GameObject tmp = this.target;
-            this.target = previousTarget;
-            if(lastTarget.Count > 0) {
-                ITargetAnswer[] newAnswers = this.target.GetComponents<ITargetAnswer>();
-                foreach(ITargetAnswer answer in newAnswers) {
-                    answer.OnSelected(tmp);
-                }
-            }
+            lastTarget.Pop().Undo();
         }
     }
 
@@ -160,9 +134,9 @@ public class TargetController : NetworkBehaviour {
         }
     }
 
-    public void Animate(GameObject go, string trigger) {
-        int iTrigger = Animator.StringToHash(trigger);
-        Animator anim = go.GetComponent<Animator>();
-        anim.SetTrigger(iTrigger);
+    public void Animate(GameObject go, string triggerOn, string triggerOff, bool shouldStack) {
+        IDoUndo command = new CommandAnimation(go, triggerOn, triggerOff, shouldStack);
+        if(shouldStack) lastTarget.Push(command);
+        command.Do();
     }
 }

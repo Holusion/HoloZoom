@@ -2613,7 +2613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToAnimate: {fileID: 1349938941}
-  trigger: 2020
+  triggerOn: 
+  triggerOff: 
 --- !u!114 &618161850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5156,7 +5157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToAnimate: {fileID: 23690004}
-  trigger: Elec
+  triggerOn: Elec
+  triggerOff: Open
 --- !u!114 &1164271534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7126,7 +7128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToAnimate: {fileID: 1349938941}
-  trigger: 2021
+  triggerOn: 
+  triggerOff: 
 --- !u!114 &1540140866
 MonoBehaviour:
   m_ObjectHideFlags: 0
