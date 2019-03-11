@@ -85,7 +85,7 @@ public class TargetController : NetworkBehaviour {
                 this.readyToRotate = true;
             }
             this.currentTime = Time.time;
-        } else if (!standByLauch && this.initPos == this.target && Time.time >= currentTime + timeBeforeStandBy) {
+        } else if (!standByLauch && this.initPos == this.target && Time.time >= currentTime + timeBeforeStandBy && !this.isServer) {
             standByLauch = true;
             StartCoroutine("StandByLoop");
         }

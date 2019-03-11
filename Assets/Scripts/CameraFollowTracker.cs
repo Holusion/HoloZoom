@@ -18,7 +18,6 @@ public class CameraFollowTracker : MonoBehaviour
     void Update()
     {
         GameObject tracker =  GameObject.Find("Tracker(Clone)");
-        TargetController controller = tracker.GetComponent<TargetController>();
 
         if(tracker != null) {
             this.transform.position = tracker.transform.position;
