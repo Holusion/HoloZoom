@@ -84,6 +84,7 @@ public class TargetController : NetworkBehaviour {
                 targetChange = false;
                 this.readyToRotate = true;
             }
+            this.currentTime = Time.time;
         } else if (!standByLauch && this.initPos == this.target && Time.time >= currentTime + timeBeforeStandBy) {
             standByLauch = true;
             StartCoroutine("StandByLoop");
@@ -131,6 +132,7 @@ public class TargetController : NetworkBehaviour {
             tmpSpeed = -maxAngularSpeed;
         }
         this.transform.RotateAround(rotateAroundPoint, Vector3.up, tmpSpeed);
+        this.currentTime = Time.time;
 
     }
 
@@ -141,12 +143,22 @@ public class TargetController : NetworkBehaviour {
                 answer.OnActive(enable);
             }
         }
+        this.currentTime = Time.time;
     }
 
     public void Animate(GameObject go, string triggerOn, string triggerOff, bool shouldStack) {
         IDoUndo command = new CommandAnimation(go, triggerOn, triggerOff, shouldStack);
         if(shouldStack) lastTarget.Push(command);
         command.Do();
+        this.currentTime = Time.time;
+    }
+
+    public void WakeUp() {
+        this.StopCoroutine("StandByLoop");
+        while(this.lastTarget.Count > 0) {
+            Reset();
+        }
+        this.standByLauch = false;
     }
 
     IEnumerator StandByLoop() {

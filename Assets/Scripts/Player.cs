@@ -64,6 +64,11 @@ public class Player : NetworkBehaviour {
         RpcAnimate(go, triggerOn, triggerOff, shouldStack);
     }
 
+    [Command]
+    public void CmdWakeUp() {
+        RpcWakeUp();
+    }
+
     [ClientRpc]
     public void RpcTarget(GameObject hit) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
@@ -109,5 +114,11 @@ public class Player : NetworkBehaviour {
     public void RpcAnimate(GameObject go, string triggerOn, string triggerOff, bool shouldStack) {
         TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
         controller.Animate(go, triggerOn, triggerOff, shouldStack);
+    }
+
+    [ClientRpc]
+    public void RpcWakeUp() {
+        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        controller.WakeUp();
     }
 }

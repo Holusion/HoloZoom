@@ -13,6 +13,7 @@ public class ClickSelectionInteraction : Interaction
 
         if(Input.GetButtonDown(Player.BUTTON_LEFT)) 
         {
+            player.CmdWakeUp();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -25,10 +26,12 @@ public class ClickSelectionInteraction : Interaction
         } 
         else if(Input.GetButtonDown(Player.BUTTON_RIGHT)) 
         {
+            player.CmdWakeUp();
             player.CmdReset();
         } 
         else if(Input.GetButton(Player.BUTTON_LEFT) && speed != 0)
         {
+            player.CmdWakeUp();
             player.CmdRotate(speed);
             lastSpeed = speed;
         } else {
