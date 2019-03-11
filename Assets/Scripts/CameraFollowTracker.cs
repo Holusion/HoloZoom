@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraFollowTracker : MonoBehaviour
 {
     private Camera cam;
+    public GameObject initPos;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +18,11 @@ public class CameraFollowTracker : MonoBehaviour
     void Update()
     {
         GameObject tracker =  GameObject.Find("Tracker(Clone)");
+        TargetController controller = tracker.GetComponent<TargetController>();
+
         if(tracker != null) {
             this.transform.position = tracker.transform.position;
             this.transform.rotation = tracker.transform.rotation;
-        }        
+        }
     }
 }

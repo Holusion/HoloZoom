@@ -17,6 +17,10 @@ public class TargetController : NetworkBehaviour {
     public GameObject initPos;
     public bool readyToRotate = false;
 
+    public float timeBeforeStandBy = 5.0f;
+    float currentTime;
+    bool standByLauch = false;
+
     public void Construct() {
         Vector3 position = this.transform.position;
         Quaternion rotation = this.transform.rotation;
@@ -42,6 +46,8 @@ public class TargetController : NetworkBehaviour {
         this.initRotation = transform.rotation;
         this.target = initPos;
         this.lastTarget = new Stack<IDoUndo>();
+
+        this.currentTime = Time.time; 
 	}
 	
 	// Update is called once per frame
@@ -78,6 +84,9 @@ public class TargetController : NetworkBehaviour {
                 targetChange = false;
                 this.readyToRotate = true;
             }
+        } else if (!standByLauch && this.initPos == this.target && Time.time >= currentTime + timeBeforeStandBy) {
+            standByLauch = true;
+            StartCoroutine("StandByLoop");
         }
     }
 
@@ -138,5 +147,27 @@ public class TargetController : NetworkBehaviour {
         IDoUndo command = new CommandAnimation(go, triggerOn, triggerOff, shouldStack);
         if(shouldStack) lastTarget.Push(command);
         command.Do();
+    }
+
+    IEnumerator StandByLoop() {
+        while(this.standByLauch) {
+            for(int j = 0; j < initPos.GetComponent<Activator>().nextSelectable.Count; j++) {
+                for(int i = 0; i < 360; i++) {
+                    RotateTarget(1);
+                    yield return new WaitForSeconds(.01f);
+                }
+
+                SetTarget(initPos.GetComponent<Activator>().nextSelectable[j].gameObject);
+                yield return new WaitForSeconds(2f);
+
+                for(int i = 0; i < 360; i++) {
+                    RotateTarget(1);
+                    yield return new WaitForSeconds(.01f);
+                }
+
+                Reset();
+                yield return new WaitForSeconds(2f);
+            }
+        }
     }
 }
