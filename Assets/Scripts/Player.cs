@@ -107,8 +107,7 @@ public class Player : NetworkBehaviour {
 
     [ClientRpc]
     public void RpcAnimate(GameObject go, string trigger) {
-        int iTrigger = Animator.StringToHash(trigger);
-        Animator anim = go.GetComponent<Animator>();
-        anim.SetTrigger(iTrigger);
+        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        controller.Animate(go, trigger);
     }
 }

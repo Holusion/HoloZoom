@@ -159,4 +159,10 @@ public class TargetController : NetworkBehaviour {
             }
         }
     }
+
+    public void Animate(GameObject go, string trigger) {
+        int iTrigger = Animator.StringToHash(trigger);
+        Animator anim = go.GetComponent<Animator>();
+        anim.SetTrigger(iTrigger);
+    }
 }
