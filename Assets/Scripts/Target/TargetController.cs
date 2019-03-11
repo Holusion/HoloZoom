@@ -154,11 +154,13 @@ public class TargetController : NetworkBehaviour {
     }
 
     public void WakeUp() {
-        this.StopCoroutine("StandByLoop");
-        while(this.lastTarget.Count > 0) {
-            Reset();
+        if(this.standByLauch) {
+            this.StopCoroutine("StandByLoop");
+            while(this.lastTarget.Count > 0) {
+                Reset();
+            }
+            this.standByLauch = false;
         }
-        this.standByLauch = false;
     }
 
     IEnumerator StandByLoop() {
