@@ -42,11 +42,5 @@ public class CommandSelection : IDoUndo
         controller.targetChange = true;
         GameObject tmp = controller.target;
         controller.target = previousTarget;
-        if(lastTarget != null) {
-            ITargetAnswer[] newAnswers = controller.target.GetComponents<ITargetAnswer>();
-            foreach(ITargetAnswer answer in newAnswers) {
-                answer.OnSelected(tmp);
-            }
-        }   
     }
 }

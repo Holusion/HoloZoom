@@ -18,7 +18,9 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
         if(previousActionPanel != null) {
             previousActionPanel.actionPanel.SetActive(false);
         }
-        actionPanel.SetActive(true);
+        if(actionPanel != null) {
+            actionPanel.SetActive(true);
+        }
     }
 
     public void OnUnselected(GameObject previousTarget) {
@@ -26,11 +28,15 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
         if(previousActionPanel != null) {
             previousActionPanel.actionPanel.SetActive(true);
         }
-        actionPanel.SetActive(false);
+        if(actionPanel != null) {
+            actionPanel.SetActive(false);
+        } 
     }
 
     public void OnDesactive() {
-        actionPanel.SetActive(false);
+        if(actionPanel != null) {
+            actionPanel.SetActive(false);
+        }
     }
 
     public void OnActive(bool enable)
