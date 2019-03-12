@@ -168,16 +168,16 @@ public class TargetController : NetworkBehaviour {
     IEnumerator StandByLoop() {
         while(this.standByLauch) {
             for(int j = 0; j < initPos.GetComponent<Activator>().nextSelectable.Count; j++) {
-                for(int i = 0; i < 360; i++) {
-                    RotateTarget(1);
+                for(int i = 0; i < 360 * 2; i++) {
+                    RotateTarget(0.5f);
                     yield return new WaitForSeconds(.01f);
                 }
 
                 SetTarget(initPos.GetComponent<Activator>().nextSelectable[j].gameObject);
                 yield return new WaitForSeconds(2f);
 
-                for(int i = 0; i < 360; i++) {
-                    RotateTarget(1);
+                for(int i = 0; i < 360 * 2; i++) {
+                    RotateTarget(0.5f);
                     yield return new WaitForSeconds(.01f);
                 }
 
