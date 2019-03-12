@@ -10,8 +10,14 @@ public class NetworkHolusion : NetworkManager {
 	{
 		discovery.Initialize();
 		discovery.StartAsServer();
-
 	}
+
+    public override void OnClientDisconnect(NetworkConnection conn) {
+        base.OnServerDisconnect(conn);
+        if(isClient) {
+            discovery.CreateClient();
+        }
+    }
 
     private void Start() {
         if(!isClient) {
