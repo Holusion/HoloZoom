@@ -35,9 +35,9 @@ public class TrainTimeInteraction : Interaction
         Vector3 nowTime = new Vector3(now.Hour, now.Minute, now.Second);
 
         if(repeatSchedule) {
-            if(nowTime.y % 4 == 0 && lastNow.y != nowTime.y) {
+            if(nowTime.y % 2 == 0 && lastNow.y != nowTime.y) {
                 LaunchTrain(player, src2, src1, nowTime);
-            } else if(nowTime.y % 5 == 0 && lastNow.y != nowTime.y) {
+            } else if(nowTime.y % 3 == 0 && lastNow.y != nowTime.y) {
                 LaunchTrain(player, src1, src2, nowTime);
             }
         } else {
