@@ -55,7 +55,6 @@ public class TargetAnimationController : MonoBehaviour, ITargetAnswer
                 previousTargetAnim.SetTrigger(trigger);
             }
         }
-
     }
 
     public void OnUnselected(GameObject previousTarget)

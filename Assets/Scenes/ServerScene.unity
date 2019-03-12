@@ -4824,10 +4824,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 980344077}
+  - component: {fileID: 980344078}
   - component: {fileID: 980344081}
   - component: {fileID: 980344080}
   - component: {fileID: 980344079}
-  - component: {fileID: 980344078}
   m_Layer: 5
   m_Name: "Pr\xE9c\xE9dent"
   m_TagString: Untagged

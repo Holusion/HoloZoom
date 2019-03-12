@@ -96,6 +96,7 @@ public class TargetController : NetworkBehaviour {
         IDoUndo command = new CommandSelection(this, go, this.target);
         lastTarget.Push(command);
         command.Do();
+        this.currentTime = Time.time;
     }
 
     public void Reset()
@@ -103,6 +104,7 @@ public class TargetController : NetworkBehaviour {
         if(this.lastTarget.Count > 0) {
             lastTarget.Pop().Undo();
         }
+        this.currentTime = Time.time;
     }
 
     public void RotateTarget(float speed)
