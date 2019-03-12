@@ -9,8 +9,10 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
     GameObject initPanel;
 
     void Start() {
-        Transform background = actionPanel.transform.Find("Panel").Find("Background");
-        initPanel = GameObject.Find("ActionPanelInitPos");
+        if(actionPanel != null) {
+            Transform background = actionPanel.transform.Find("Panel").Find("Background");
+            initPanel = GameObject.Find("ActionPanelInitPos");
+        }
     }
 
     public void OnSelected(GameObject previousTarget) {
