@@ -121,11 +121,7 @@ public class TargetController : NetworkBehaviour {
                 }
             }
         } else {
-            // foreach(Activator.ActivatorObject ao in this.target.GetComponent<Activator>().nextSelectable) {
-            //     rotateAroundPoint += ao.gameObject.transform.position;
-            // }
             rotateAroundPoint += this.target.transform.Find("Pivot").position;
-            // rotateAroundPoint /= this.target.GetComponent<Activator>().nextSelectable.Count;
         }
 
         if(speed >= maxAngularSpeed) {
