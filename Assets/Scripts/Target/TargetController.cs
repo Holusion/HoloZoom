@@ -77,6 +77,7 @@ public class TargetController : NetworkBehaviour {
             float distance = Vector3.Distance(transform.position, targetPosition);
             transform.position = Vector3.Lerp(transform.position,targetPosition, zoomSpeed * Time.deltaTime);
             Camera.main.fieldOfView += (targetFieldView - Camera.main.fieldOfView) / (distance + 1);
+            Mathf.Clamp(Camera.main.fieldOfView, 8, 60);
             Camera.main.farClipPlane += (targetFarPlane - Camera.main.farClipPlane) / (distance + 1);
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1 && Quaternion.Angle(toRotation, transform.rotation) < 1)
