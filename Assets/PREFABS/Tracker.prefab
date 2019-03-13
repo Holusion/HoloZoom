@@ -104,12 +104,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactiveTarget: {fileID: 0}
   target: {fileID: 0}
-  fadeRatio: 0.1
   rotationSpeed: 5
   zoomSpeed: 5
   maxAngularSpeed: 100
+  targetChange: 0
   initPos: {fileID: 0}
   readyToRotate: 0
+  timeBeforeStandBy: 30
 --- !u!1 &25
 GameObject:
   m_ObjectHideFlags: 0
