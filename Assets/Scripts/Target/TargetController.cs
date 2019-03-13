@@ -15,7 +15,7 @@ public class TargetController : NetworkBehaviour {
     Quaternion initRotation;
     Stack<IDoUndo> lastTarget;
     public GameObject initPos;
-    public bool readyToRotate = false;
+    public bool readyToRotate = true;
 
     public float timeBeforeStandBy = 5.0f;
     float currentTime;
@@ -110,30 +110,31 @@ public class TargetController : NetworkBehaviour {
 
     public void RotateTarget(float speed)
     {
-        float tmpSpeed = speed;
-        Vector3 rotateAroundPoint = new Vector3();
+        if(readyToRotate) {
+            float tmpSpeed = speed;
+            Vector3 rotateAroundPoint = new Vector3();
 
-        if(this.target.GetComponent<BoxCollider>() != null) {
-            rotateAroundPoint = this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center);
-            ITargetAnswer[] answers = target.GetComponents<ITargetAnswer>();
-            foreach(ITargetAnswer answer in answers) {
-                if(answer != null) {
-                    answer.OnRotate();
+            if(this.target.GetComponent<BoxCollider>() != null) {
+                rotateAroundPoint = this.target.transform.TransformPoint(this.target.GetComponent<BoxCollider>().center);
+                ITargetAnswer[] answers = target.GetComponents<ITargetAnswer>();
+                foreach(ITargetAnswer answer in answers) {
+                    if(answer != null) {
+                        answer.OnRotate();
+                    }
                 }
+            } else {
+                rotateAroundPoint += this.target.transform.Find("Pivot").position;
             }
-        } else {
-            rotateAroundPoint += this.target.transform.Find("Pivot").position;
-        }
 
-        if(speed >= maxAngularSpeed) {
-            tmpSpeed = maxAngularSpeed;
+            if(speed >= maxAngularSpeed) {
+                tmpSpeed = maxAngularSpeed;
+            }
+            if(speed <= -maxAngularSpeed) {
+                tmpSpeed = -maxAngularSpeed;
+            }
+            this.transform.RotateAround(rotateAroundPoint, Vector3.up, tmpSpeed);
+            this.currentTime = Time.time;
         }
-        if(speed <= -maxAngularSpeed) {
-            tmpSpeed = -maxAngularSpeed;
-        }
-        this.transform.RotateAround(rotateAroundPoint, Vector3.up, tmpSpeed);
-        this.currentTime = Time.time;
-
     }
 
     public void Enable(GameObject go, bool enable) {

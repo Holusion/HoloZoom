@@ -60,7 +60,6 @@ public class TrainTimeInteraction : Interaction
         GameObject gameObject = GameObject.Find(gameObjectName);
         if(gameObject) {
             gameObject.transform.Find("GareInfo").Find("Canvas").Find("Text").GetComponent<Text>().text = message;
-            Debug.Log(src);
             player.CmdAnimate(gameObject, src, "", false);
         }
         lastNow = nowTime;

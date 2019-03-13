@@ -109,7 +109,7 @@ MonoBehaviour:
   maxAngularSpeed: 100
   targetChange: 0
   initPos: {fileID: 0}
-  readyToRotate: 0
+  readyToRotate: 1
   timeBeforeStandBy: 30
 --- !u!1 &25
 GameObject:
