@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Vitres
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHABLEND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -79,9 +79,9 @@ Material:
     - _FresnelStrength: 0.69
     - _FresnelThickness: 0.41
     - _GlossMapScale: 0.63
-    - _Glossiness: 0.756
+    - _Glossiness: 0.945
     - _GlossyReflections: 1
-    - _Metallic: 0.903
+    - _Metallic: 0.502
     - _Mode: 2
     - _NormalIntensity: 0
     - _OcclusionStrength: 1
@@ -99,7 +99,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.6431373, g: 0.7647059, b: 0.73333335, a: 1}
+    - _Color: {r: 0.58357066, g: 0.7830189, b: 0.7534983, a: 1}
     - _ColorGlass: {r: 0.3243592, g: 0.3490566, b: 0.3464325, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.74509805, g: 0.8784314, b: 1, a: 1}
