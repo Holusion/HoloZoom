@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 [ExecuteInEditMode]
 public class GameManager : MonoBehaviour
@@ -11,10 +12,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] interactiveObjectWithBubbleText;
     public NetworkHolusion networkHolusion;
 
+    CameraFlop cameraFlop;
+
     // Start is called before the first frame update
     void Start()
     {
-        this.UpdateView();
     
     }
 
