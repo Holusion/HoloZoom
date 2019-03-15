@@ -7,6 +7,7 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
 {
     public GameObject actionPanel;
     GameObject initPanel;
+    public float animationTime = 0.75f;
 
     void Start() {
         if(actionPanel != null) {
@@ -15,24 +16,37 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
         }
     }
 
-    public void OnSelected(GameObject previousTarget) {
-        ActionPanelController previousActionPanel = previousTarget.GetComponent<ActionPanelController>();
+    IEnumerator LaunchAnim(GameObject previousActionPanel, GameObject actionPanel) {
         if(previousActionPanel != null) {
-            previousActionPanel.actionPanel.SetActive(false);
+            previousActionPanel.GetComponent<Animator>().SetTrigger("Close");
+            yield return new WaitForSeconds(animationTime);
+            previousActionPanel.SetActive(false);
         }
         if(actionPanel != null) {
-            actionPanel.SetActive(true);
+        actionPanel.SetActive(true);
         }
     }
 
-    public void OnUnselected(GameObject previousTarget) {
-        ActionPanelController previousActionPanel = previousTarget.GetComponent<ActionPanelController>();
-        if(previousActionPanel != null) {
-            previousActionPanel.actionPanel.SetActive(true);
+    public void OnSelected(GameObject previousTarget) {
+        GameObject previousActionPanel = null;
+        if(previousTarget.GetComponent<ActionPanelController>() != null) {
+            previousActionPanel = previousTarget.GetComponent<ActionPanelController>().actionPanel;
         }
-        if(actionPanel != null) {
-            actionPanel.SetActive(false);
-        } 
+        StartCoroutine(LaunchAnim(previousActionPanel, actionPanel));
+    }
+
+    public void OnUnselected(GameObject previousTarget) {
+        GameObject previousActionPanel = null;
+        if(previousTarget.GetComponent<ActionPanelController>() != null) {
+            previousActionPanel = previousTarget.GetComponent<ActionPanelController>().actionPanel;
+        }
+        StartCoroutine(LaunchAnim(actionPanel, previousActionPanel));
+        // if(previousActionPanel != null) {
+        //     previousActionPanel.actionPanel.SetActive(true);
+        // }
+        // if(actionPanel != null) {
+        //     actionPanel.SetActive(false);
+        // } 
     }
 
     public void OnDesactive() {

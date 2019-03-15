@@ -80,7 +80,7 @@ public class TargetController : NetworkBehaviour {
             Mathf.Clamp(Camera.main.fieldOfView, 8, 60);
             Camera.main.farClipPlane += (targetFarPlane - Camera.main.farClipPlane) / (distance + 1);
 
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1 && Quaternion.Angle(toRotation, transform.rotation) < 1)
+            if (Vector3.Distance(transform.position, targetPosition) < 0.01 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
                 targetChange = false;
                 this.readyToRotate = true;
