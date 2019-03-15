@@ -29,6 +29,6 @@ public class GameManager : MonoBehaviour
             go.transform.Find("BubbleText").gameObject.SetActive(!this.isClient);
         }
 
-        Camera.main.clearFlags = isClient ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor;
+        if(Camera.main != null) Camera.main.clearFlags = isClient ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor;
     }
 }

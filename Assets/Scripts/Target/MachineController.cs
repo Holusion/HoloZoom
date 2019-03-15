@@ -12,6 +12,5 @@ public class MachineController : TargetAnimationController, ITargetAnswer
     public new void OnUnselected(GameObject lastTarget) {
         base.OnUnselected(lastTarget);
         this.GetComponent<Animator>().SetTrigger("Close");
-        // this.gameObject.SetActive(false);
     }
 }
