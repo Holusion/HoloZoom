@@ -79,9 +79,9 @@ Material:
     - _FresnelStrength: 0.69
     - _FresnelThickness: 0.41
     - _GlossMapScale: 0.63
-    - _Glossiness: 0.945
+    - _Glossiness: 0.95
     - _GlossyReflections: 1
-    - _Metallic: 0.502
+    - _Metallic: 0.27
     - _Mode: 2
     - _NormalIntensity: 0
     - _OcclusionStrength: 1
