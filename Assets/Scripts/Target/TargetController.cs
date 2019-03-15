@@ -17,10 +17,10 @@ public class TargetController : NetworkBehaviour {
     Stack<IDoUndo> lastTarget;
     public GameObject initPos;
     public bool readyToRotate = true;
-
     public float timeBeforeStandBy = 5.0f;
     float currentTime;
     bool standByLauch = false;
+    CameraFollowTracker cameraFollowTracker;
 
     public void Construct() {
         Vector3 position = this.transform.position;
@@ -49,6 +49,7 @@ public class TargetController : NetworkBehaviour {
         this.lastTarget = new Stack<IDoUndo>();
 
         this.currentTime = Time.time; 
+        this.cameraFollowTracker = Camera.main.GetComponent<CameraFollowTracker>();
 	}
 	
 	// Update is called once per frame
@@ -58,8 +59,8 @@ public class TargetController : NetworkBehaviour {
             Vector3 direction;
             Vector3 targetPosition;
             Quaternion toRotation;
-            float targetFieldView = gameManager.maxFOV;
-            float targetFarPlane = gameManager.minFarClip;
+            float targetFieldView = cameraFollowTracker.maxFOV;
+            float targetFarPlane = cameraFollowTracker.minFarClip;
 
             if(target.GetComponent<BoxCollider>() != null) {
                 direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;
@@ -68,8 +69,8 @@ public class TargetController : NetworkBehaviour {
             } else {
                 targetPosition = target.transform.position;
                 toRotation = initRotation;
-                targetFieldView = gameManager.minFOV;
-                targetFarPlane = gameManager.maxFarClip;
+                targetFieldView = cameraFollowTracker.minFOV;
+                targetFarPlane = cameraFollowTracker.maxFarClip;
             }
 
             this.transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
@@ -77,9 +78,8 @@ public class TargetController : NetworkBehaviour {
 
             float distance = Vector3.Distance(transform.position, targetPosition);
             transform.position = Vector3.Lerp(transform.position,targetPosition, zoomSpeed * Time.deltaTime);
-            Camera.main.fieldOfView += (targetFieldView - Camera.main.fieldOfView) / (distance + 1);
-            Mathf.Clamp(Camera.main.fieldOfView, 8, 60);
-            Camera.main.farClipPlane += (targetFarPlane - Camera.main.farClipPlane) / (distance + 1);
+            cameraFollowTracker.ChangeFOV(targetFieldView, distance);
+            cameraFollowTracker.ChangeFarClip(targetFarPlane, distance);
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.01 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {

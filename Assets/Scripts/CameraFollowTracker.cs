@@ -5,13 +5,16 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraFollowTracker : MonoBehaviour
 {
-    private Camera cam;
-    public GameObject initPos;
+    [Header("Camera Settings")]
+    public float minFarClip = 25;
+    public float maxFarClip = 300;
+    public float minFOV = 25;
+    public float maxFOV = 60;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = this.GetComponent<Camera>();
+
     }
 
     // Update is called once per frame
@@ -23,5 +26,14 @@ public class CameraFollowTracker : MonoBehaviour
             this.transform.position = tracker.transform.position;
             this.transform.rotation = tracker.transform.rotation;
         }
+    }
+
+    public void ChangeFarClip(float targetFarPlane, float distance) {
+        Camera.main.farClipPlane += (targetFarPlane - Camera.main.farClipPlane) / (distance + 1);
+    }
+
+    public void ChangeFOV(float targetFOV, float distance) {
+        Camera.main.fieldOfView += (targetFOV - Camera.main.fieldOfView) / (distance + 1);
+        Mathf.Clamp(Camera.main.fieldOfView, minFOV, maxFOV);
     }
 }
