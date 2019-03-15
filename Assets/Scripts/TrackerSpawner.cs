@@ -15,6 +15,7 @@ public class TrackerSpawner : NetworkBehaviour {
         TargetController controller = tracker.GetComponent<TargetController>();
         controller.interactiveTarget = GameObject.Find("InteractiveObjects");
         controller.initPos = GameObject.Find("InitPos");
+        controller.gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         NetworkServer.Spawn(tracker);
     }
 }

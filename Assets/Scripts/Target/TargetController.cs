@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 
 public class TargetController : NetworkBehaviour {
 
+    public GameManager gameManager;
     public GameObject interactiveTarget;
     public GameObject target;
     public float rotationSpeed = 0.1f;
@@ -57,8 +58,8 @@ public class TargetController : NetworkBehaviour {
             Vector3 direction;
             Vector3 targetPosition;
             Quaternion toRotation;
-            float targetFieldView = 60;
-            float targetFarPlane = 8;
+            float targetFieldView = gameManager.maxFOV;
+            float targetFarPlane = gameManager.minFarClip;
 
             if(target.GetComponent<BoxCollider>() != null) {
                 direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;
@@ -67,8 +68,8 @@ public class TargetController : NetworkBehaviour {
             } else {
                 targetPosition = target.transform.position;
                 toRotation = initRotation;
-                targetFieldView = 8;
-                targetFarPlane = 500;
+                targetFieldView = gameManager.minFOV;
+                targetFarPlane = gameManager.maxFarClip;
             }
 
             this.transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);

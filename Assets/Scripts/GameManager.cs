@@ -7,12 +7,16 @@ using UnityEngine.Rendering.PostProcessing;
 public class GameManager : MonoBehaviour
 {
     public bool isClient;
-
     public GameObject client;
     public GameObject[] interactiveObjectWithBubbleText;
     public NetworkHolusion networkHolusion;
 
-    CameraFlop cameraFlop;
+    [Header("Camera Settings")]
+    public GameObject cam;
+    public float minFarClip = 25;
+    public float maxFarClip = 300;
+    public float minFOV = 25;
+    public float maxFOV = 60;
 
     // Start is called before the first frame update
     void Start()

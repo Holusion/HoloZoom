@@ -236,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 53c8a3f6d184c850c8b38c6c84ad8a44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 53c8a3f6d184c850c8b38c6c84ad8a44, type: 3}
       propertyPath: m_LocalPosition.z
@@ -839,6 +839,11 @@ MonoBehaviour:
   - {fileID: 1500086397}
   - {fileID: 1536460129}
   networkHolusion: {fileID: 232584502}
+  cam: {fileID: 0}
+  minFarClip: 15
+  maxFarClip: 300
+  minFOV: 25
+  maxFOV: 60
 --- !u!4 &84542157
 Transform:
   m_ObjectHideFlags: 0
@@ -7618,7 +7623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334538417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0, z: 106.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 47771068}
