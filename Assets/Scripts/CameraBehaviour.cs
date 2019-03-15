@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class CameraFollowTracker : MonoBehaviour
+public class CameraBehaviour : MonoBehaviour
 {
     [Header("Camera Settings")]
     public float minFarClip = 25;
     public float maxFarClip = 300;
     public float minFOV = 25;
     public float maxFOV = 60;
+    public Vector3 initPos;
+    public Quaternion initRot;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        this.initPos = this.transform.position;
+        this.initRot = this.transform.rotation;
     }
 
     // Update is called once per frame

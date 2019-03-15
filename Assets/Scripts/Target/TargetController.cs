@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 
 public class TargetController : NetworkBehaviour {
 
-    public GameManager gameManager;
     public GameObject interactiveTarget;
     public GameObject target;
     public float rotationSpeed = 0.1f;
@@ -20,7 +19,7 @@ public class TargetController : NetworkBehaviour {
     public float timeBeforeStandBy = 5.0f;
     float currentTime;
     bool standByLauch = false;
-    CameraFollowTracker cameraFollowTracker;
+    CameraBehaviour cameraBehaviour;
 
     public void Construct() {
         Vector3 position = this.transform.position;
@@ -33,15 +32,6 @@ public class TargetController : NetworkBehaviour {
         this.lastTarget = new Stack<IDoUndo>();
     }
 
-    void Awake()
-    {
-        Vector3 position = this.transform.position;
-        Quaternion rotation = this.transform.rotation;
-
-        this.interactiveTarget = GameObject.Find("InteractiveObjects");
-        this.initPos = GameObject.Find("InitPos");
-    }
-
     // Use this for initialization
     void Start () {
         this.initRotation = transform.rotation;
@@ -49,7 +39,7 @@ public class TargetController : NetworkBehaviour {
         this.lastTarget = new Stack<IDoUndo>();
 
         this.currentTime = Time.time; 
-        this.cameraFollowTracker = Camera.main.GetComponent<CameraFollowTracker>();
+        this.cameraBehaviour = Camera.main.GetComponent<CameraBehaviour>();
 	}
 	
 	// Update is called once per frame
@@ -59,18 +49,18 @@ public class TargetController : NetworkBehaviour {
             Vector3 direction;
             Vector3 targetPosition;
             Quaternion toRotation;
-            float targetFieldView = cameraFollowTracker.maxFOV;
-            float targetFarPlane = cameraFollowTracker.minFarClip;
+            float targetFieldView = cameraBehaviour.maxFOV;
+            float targetFarPlane = cameraBehaviour.minFarClip;
 
             if(target.GetComponent<BoxCollider>() != null) {
                 direction = target.GetComponent<BoxCollider>().bounds.center - transform.position;
                 targetPosition = target.transform.Find("CamPos").transform.position;
                 toRotation = Quaternion.LookRotation(direction);
             } else {
-                targetPosition = target.transform.position;
-                toRotation = initRotation;
-                targetFieldView = cameraFollowTracker.minFOV;
-                targetFarPlane = cameraFollowTracker.maxFarClip;
+                targetPosition = cameraBehaviour.initPos;
+                toRotation = cameraBehaviour.initRot;
+                targetFieldView = cameraBehaviour.minFOV;
+                targetFarPlane = cameraBehaviour.maxFarClip;
             }
 
             this.transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
@@ -78,8 +68,8 @@ public class TargetController : NetworkBehaviour {
 
             float distance = Vector3.Distance(transform.position, targetPosition);
             transform.position = Vector3.Lerp(transform.position,targetPosition, zoomSpeed * Time.deltaTime);
-            cameraFollowTracker.ChangeFOV(targetFieldView, distance);
-            cameraFollowTracker.ChangeFarClip(targetFarPlane, distance);
+            cameraBehaviour.ChangeFOV(targetFieldView, distance);
+            cameraBehaviour.ChangeFarClip(targetFarPlane, distance);
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.01 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
@@ -124,7 +114,7 @@ public class TargetController : NetworkBehaviour {
                     }
                 }
             } else {
-                rotateAroundPoint += this.target.transform.Find("Pivot").position;
+                rotateAroundPoint += this.target.transform.position;
             }
 
             if(speed >= maxAngularSpeed) {
@@ -133,6 +123,7 @@ public class TargetController : NetworkBehaviour {
             if(speed <= -maxAngularSpeed) {
                 tmpSpeed = -maxAngularSpeed;
             }
+            Debug.Log(tmpSpeed);
             this.transform.RotateAround(rotateAroundPoint, Vector3.up, tmpSpeed);
             this.currentTime = Time.time;
         }
