@@ -8,6 +8,7 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
     public GameObject actionPanel;
     GameObject initPanel;
     public float animationTime = 0.75f;
+    GameObject previousActionPanel;
 
     void Start() {
         if(actionPanel != null) {
@@ -23,7 +24,7 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
             previousActionPanel.SetActive(false);
         }
         if(actionPanel != null) {
-        actionPanel.SetActive(true);
+            actionPanel.SetActive(true);
         }
     }
 
@@ -32,6 +33,7 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
         if(previousTarget.GetComponent<ActionPanelController>() != null) {
             previousActionPanel = previousTarget.GetComponent<ActionPanelController>().actionPanel;
         }
+        this.previousActionPanel = previousActionPanel;
         StartCoroutine(LaunchAnim(previousActionPanel, actionPanel));
     }
 
@@ -44,6 +46,9 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
     }
 
     public void OnDesactive() {
+        if(actionPanel == null && this.previousActionPanel != null) {
+            this.previousActionPanel.SetActive(true);
+        }
         if(actionPanel != null) {
             actionPanel.SetActive(false);
         }
