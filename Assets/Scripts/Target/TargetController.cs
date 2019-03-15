@@ -20,6 +20,7 @@ public class TargetController : NetworkBehaviour {
     float currentTime;
     bool standByLauch = false;
     CameraBehaviour cameraBehaviour;
+    public GameObject map;
 
     public void Construct() {
         Vector3 position = this.transform.position;
@@ -72,6 +73,7 @@ public class TargetController : NetworkBehaviour {
             cameraBehaviour.ChangeFOV(targetFieldView, distance);
             cameraBehaviour.ChangeFarClip(targetFarPlane, distance);
 
+            this.map.SetActive(this.target == initPos);
             if (Vector3.Distance(transform.position, targetPosition) < 0.01 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
                 targetChange = false;

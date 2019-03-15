@@ -41,12 +41,6 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
             previousActionPanel = previousTarget.GetComponent<ActionPanelController>().actionPanel;
         }
         StartCoroutine(LaunchAnim(actionPanel, previousActionPanel));
-        // if(previousActionPanel != null) {
-        //     previousActionPanel.actionPanel.SetActive(true);
-        // }
-        // if(actionPanel != null) {
-        //     actionPanel.SetActive(false);
-        // } 
     }
 
     public void OnDesactive() {

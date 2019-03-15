@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class TrackerSpawner : NetworkBehaviour {
     
     public GameObject trackerPrefab;
+    public GameObject map;
 
     public override void OnStartServer() {
         Vector3 position = this.transform.position;
@@ -15,6 +16,7 @@ public class TrackerSpawner : NetworkBehaviour {
         TargetController controller = tracker.GetComponent<TargetController>();
         controller.interactiveTarget = GameObject.Find("InteractiveObjects");
         controller.initPos = GameObject.Find("InitPos");
+        controller.map = map;
 
         NetworkServer.Spawn(tracker);
     }

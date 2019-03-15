@@ -1690,7 +1690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea991c10f9c282d998ed0c1f76cbaaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minFarClip: 25
+  minFarClip: 40
   maxFarClip: 300
   minFOV: 25
   maxFOV: 60
@@ -3892,6 +3892,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881421714}
   m_CullTransparentMesh: 0
+--- !u!1 &886976790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 53c8a3f6d184c850c8b38c6c84ad8a44,
+    type: 3}
+  m_PrefabInstance: {fileID: 25328100}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &886976793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886976790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d704d29abdd629493829f47440ef8d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initPos: {fileID: 47771067}
+  targetController: {fileID: 0}
 --- !u!1 &893839708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4957,6 +4983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackerPrefab: {fileID: 24, guid: df86f4c87195788629830bb5b5498711, type: 3}
+  map: {fileID: 886976790}
 --- !u!114 &1050261570
 MonoBehaviour:
   m_ObjectHideFlags: 0
