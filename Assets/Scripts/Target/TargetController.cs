@@ -35,6 +35,7 @@ public class TargetController : NetworkBehaviour {
     // Use this for initialization
     void Start () {
         this.initRotation = transform.rotation;
+        this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
         this.lastTarget = new Stack<IDoUndo>();
 
@@ -123,7 +124,6 @@ public class TargetController : NetworkBehaviour {
             if(speed <= -maxAngularSpeed) {
                 tmpSpeed = -maxAngularSpeed;
             }
-            Debug.Log(tmpSpeed);
             this.transform.RotateAround(rotateAroundPoint, Vector3.up, tmpSpeed);
             this.currentTime = Time.time;
         }
