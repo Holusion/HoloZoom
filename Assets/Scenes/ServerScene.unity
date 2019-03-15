@@ -1620,8 +1620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7b37a477a405e79abe07dac015ea03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayInterval: 0.02
-  maxDistance: 0.2
+  rayInterval: 0.1
+  maxDistance: 1
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -10978,7 +10978,7 @@ Light:
     m_NormalBias: 0.4
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 1
+  m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
