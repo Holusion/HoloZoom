@@ -73,7 +73,7 @@ public class TargetController : NetworkBehaviour {
             cameraBehaviour.ChangeFOV(targetFieldView, distance);
             cameraBehaviour.ChangeFarClip(targetFarPlane, distance);
 
-            this.map.SetActive(this.target == initPos);
+            if(this.isServer) this.map.SetActive(this.target == initPos);
             if (Vector3.Distance(transform.position, targetPosition) < 0.01 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
                 targetChange = false;
