@@ -46,12 +46,12 @@ public class ActionPanelController : MonoBehaviour, ITargetAnswer
     }
 
     public void OnDesactive() {
-        if(actionPanel == null && this.previousActionPanel != null) {
-            this.previousActionPanel.SetActive(true);
-        }
-        if(actionPanel != null) {
-            actionPanel.SetActive(false);
-        }
+        //if(actionPanel == null && this.previousActionPanel != null) {
+        //    this.previousActionPanel.SetActive(true);
+        //}
+        //if(actionPanel != null) {
+        //    actionPanel.SetActive(false);
+        //}
     }
 
     public void OnActive(bool enable)
