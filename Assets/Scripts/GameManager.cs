@@ -13,16 +13,8 @@ public class GameManager : MonoBehaviour
 
     private bool skyChange = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {    
-        // this.UpdateView();
-    }
 #if UNITY_EDITOR
     void Update() {
-        // if(Camera.main != null && !this.skyChange) {
-        //     this.skyChange = true;
-        // }
         this.UpdateView();
     }
 #endif
