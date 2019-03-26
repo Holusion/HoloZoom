@@ -18,14 +18,14 @@ public class GameManager : MonoBehaviour
     {    
         // this.UpdateView();
     }
-
+#if UNITY_EDITOR
     void Update() {
         // if(Camera.main != null && !this.skyChange) {
         //     this.skyChange = true;
         // }
         this.UpdateView();
     }
-
+#endif
     void UpdateView() {
         this.canvas.SetActive(isClient);
         this.networkHolusion.isClient = !this.isClient;
