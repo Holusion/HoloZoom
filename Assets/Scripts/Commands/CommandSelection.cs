@@ -1,6 +1,7 @@
+using System.Text;
 using UnityEngine;
 
-public class CommandSelection : IDoUndo
+public class CommandSelection : Command
 {
     TargetController controller;
     GameObject go, lastTarget;
@@ -28,6 +29,12 @@ public class CommandSelection : IDoUndo
                 }
             }
         }
+    }
+
+    public byte[] Serialize()
+    {
+        string packet = "SELECTION:" + go.name + ":" + lastTarget.name;
+        return Encoding.ASCII.GetBytes(packet);
     }
 
     public void Undo()

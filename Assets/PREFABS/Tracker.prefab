@@ -110,7 +110,8 @@ MonoBehaviour:
   targetChange: 0
   initPos: {fileID: 0}
   readyToRotate: 1
-  timeBeforeStandBy: 30
+  timeBeforeStandBy: 15
+  map: {fileID: 0}
 --- !u!1 &25
 GameObject:
   m_ObjectHideFlags: 0

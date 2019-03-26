@@ -1,6 +1,7 @@
+using System.Text;
 using UnityEngine;
 
-public class CommandAnimation : IDoUndo
+public class CommandAnimation : Command
 {
     GameObject go;
     string triggerOn, triggerOff;
@@ -27,6 +28,12 @@ public class CommandAnimation : IDoUndo
                 tree.Push(triggerOn);
             }
         }
+    }
+
+    public byte[] Serialize()
+    {
+        string packet = "Animation:" + go.name + ":" + triggerOn + ":" + triggerOff + ":" + (shouldStack ? 1 : 0);
+        return Encoding.ASCII.GetBytes(packet);
     }
 
     public void Undo()

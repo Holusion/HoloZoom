@@ -8,7 +8,8 @@ public class OverrideNetworkDiscovery : NetworkDiscovery
     public override void OnReceivedBroadcast(string fromAddress, string data)
     {
         NetworkManager.singleton.networkAddress = fromAddress;
-        NetworkManager.singleton.StartClient();
+        UnityEngine.Networking.NetworkClient client = NetworkManager.singleton.StartClient();
+        client.RegisterHandler(MyMsgType.State, OnStateMsg);
         this.StopBroadcast();
     }
 
@@ -19,5 +20,16 @@ public class OverrideNetworkDiscovery : NetworkDiscovery
 
     void Start() {
         this.showGUI = false;
+    }
+
+    void OnStateMsg(NetworkMessage netMsg) {
+        StateMessage msg = netMsg.ReadMessage<StateMessage>();
+        this.StartCoroutine("Sync", msg);
+    }
+    
+    IEnumerator Sync(StateMessage msg) {
+        yield return new WaitForSeconds(2f);
+        TargetController controller = GameObject.FindWithTag("Tracker").GetComponent<TargetController>();
+        controller.lastTarget.DeSerialize(msg.payload);
     }
 }

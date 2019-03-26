@@ -19,6 +19,18 @@ public class NetworkHolusion : NetworkManager {
         }
     }
 
+    public override void OnServerReady(NetworkConnection conn) {
+        base.OnServerReady(conn);
+        if(!isClient) {
+            byte[] payload = GameObject.FindWithTag("Tracker").GetComponent<TargetController>().lastTarget.Serialize();
+            StateMessage msg = new StateMessage();
+            msg.payload = payload;
+            Debug.Log("sendmsg");
+            NetworkServer.SendToClient(conn.connectionId, MyMsgType.State, msg);
+        }
+
+    }
+
     private void Start() {
         if(!isClient) {
             NetworkManager.singleton.StartHost();

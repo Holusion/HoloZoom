@@ -13,7 +13,7 @@ public class TargetController : NetworkBehaviour {
     public float maxAngularSpeed = 10f;
     public bool targetChange = false;
     Quaternion initRotation;
-    Stack<IDoUndo> lastTarget;
+    public CommandList lastTarget;
     public GameObject initPos;
     public bool readyToRotate = true;
     public float timeBeforeStandBy = 5.0f;
@@ -30,7 +30,7 @@ public class TargetController : NetworkBehaviour {
         this.interactiveTarget = GameObject.Find("InteractiveObjects");
         this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
-        this.lastTarget = new Stack<IDoUndo>();
+        this.lastTarget = new CommandList();
     }
 
     // Use this for initialization
@@ -38,7 +38,7 @@ public class TargetController : NetworkBehaviour {
         this.initRotation = transform.rotation;
         this.initPos = GameObject.Find("InitPos");
         this.target = initPos;
-        this.lastTarget = new Stack<IDoUndo>();
+        this.lastTarget = new CommandList();
 
         this.currentTime = Time.time; 
         this.cameraBehaviour = Camera.main.GetComponent<CameraBehaviour>();
@@ -80,7 +80,7 @@ public class TargetController : NetworkBehaviour {
                 this.readyToRotate = true;
             }
             this.currentTime = Time.time;
-        } else if (!standByLauch && this.initPos == this.target && Time.time >= currentTime + timeBeforeStandBy && !this.isServer) {
+        } else if (!standByLauch && Time.time >= currentTime + timeBeforeStandBy && !this.isServer) {
             standByLauch = true;
             StartCoroutine("StandByLoop");
         }
@@ -88,16 +88,15 @@ public class TargetController : NetworkBehaviour {
 
     public void SetTarget(GameObject go)
     {
-        IDoUndo command = new CommandSelection(this, go, this.target);
+        Command command = new CommandSelection(this, go, this.target);
         lastTarget.Push(command);
-        command.Do();
         this.currentTime = Time.time;
     }
 
     public void Reset()
     {
-        if(this.lastTarget.Count > 0) {
-            lastTarget.Pop().Undo();
+        if(this.lastTarget.Count() > 0) {
+            lastTarget.Pop();
         }
         this.currentTime = Time.time;
     }
@@ -142,24 +141,30 @@ public class TargetController : NetworkBehaviour {
     }
 
     public void Animate(GameObject go, string triggerOn, string triggerOff, bool shouldStack) {
-        IDoUndo command = new CommandAnimation(go, triggerOn, triggerOff, shouldStack);
+        Command command = new CommandAnimation(go, triggerOn, triggerOff, shouldStack);
         if(shouldStack) lastTarget.Push(command);
-        command.Do();
+        else command.Do();
         this.currentTime = Time.time;
     }
 
     public void WakeUp() {
         if(this.standByLauch) {
             this.StopCoroutine("StandByLoop");
-            while(this.lastTarget.Count > 0) {
+            while(this.lastTarget.Count() > 0) {
                 Reset();
             }
             this.standByLauch = false;
+            this.transform.position = cameraBehaviour.initPos;
+            this.transform.rotation = cameraBehaviour.initRot;
         }
     }
 
     IEnumerator StandByLoop() {
         while(this.standByLauch) {
+            while(this.lastTarget.Count() > 0) {
+                this.Reset();
+            }
+
             for(int j = 0; j < initPos.GetComponent<Activator>().nextSelectable.Count; j++) {
                 for(int i = 0; i < 360 * 2; i++) {
                     RotateTarget(0.5f);
@@ -178,5 +183,13 @@ public class TargetController : NetworkBehaviour {
                 yield return new WaitForSeconds(2f);
             }
         }
+    }
+
+    public override bool OnSerialize(NetworkWriter writer, bool initialState) {
+        if(initialState) {
+            
+        }
+
+        return false;
     }
 }
