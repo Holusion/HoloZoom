@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca547aa9c02586b57a374446749252db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isClient: 0
+  isClient: 1
   canvas: {fileID: 404257385}
   interactiveObjectWithBubbleText:
   - {fileID: 23690004}
@@ -1527,7 +1527,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   discovery: {fileID: 1670886453}
-  isClient: 1
+  isClient: 0
 --- !u!4 &232584503
 Transform:
   m_ObjectHideFlags: 0
@@ -1631,7 +1631,7 @@ Camera:
   m_GameObject: {fileID: 282840810}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -2102,7 +2102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &404257386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,7 +4440,7 @@ PrefabInstance:
     - target: {fileID: 1266309676574712260, guid: 7c0b7fc95257add429808e9984c799bc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402330463845609198, guid: 7c0b7fc95257add429808e9984c799bc,
         type: 3}
@@ -4719,7 +4719,7 @@ PrefabInstance:
     - target: {fileID: 461659887579531068, guid: f3f1a2cf2804035b4bcdc9788dd8ef1f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 461659887579531068, guid: f3f1a2cf2804035b4bcdc9788dd8ef1f,
         type: 3}
@@ -18025,7 +18025,7 @@ PrefabInstance:
     - target: {fileID: 461659887579531068, guid: f3f1a2cf2804035b4bcdc9788dd8ef1f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 461659887579531068, guid: f3f1a2cf2804035b4bcdc9788dd8ef1f,
         type: 3}
