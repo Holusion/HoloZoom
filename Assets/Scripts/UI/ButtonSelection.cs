@@ -6,6 +6,6 @@ public class ButtonSelection : MonoBehaviour, ButtonAction
 
     public void MakeAction(Player player)
     {
-        player.CmdTargets(new string[] {selectedGameObject.name});
+        // player.CmdTargets(new string[] {selectedGameObject.name});
     }
 }

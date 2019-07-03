@@ -8,6 +8,6 @@ public class ButtonLaunchAnimation : MonoBehaviour, ButtonAction
 
     public void MakeAction(Player player)
     {
-        player.CmdAnimate(objectToAnimate, triggerOn, triggerOff, shouldStack);
+        // player.CmdAnimate(objectToAnimate, triggerOn, triggerOff, shouldStack);
     }
 }

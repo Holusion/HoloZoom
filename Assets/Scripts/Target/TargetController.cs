@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TargetController : NetworkBehaviour {
+public class TargetController : MonoBehaviour {
 
     public GameObject interactiveTarget;
     public GameObject target;
@@ -71,14 +71,14 @@ public class TargetController : NetworkBehaviour {
             cameraBehaviour.ChangeFOV(targetFieldView, distance);
             cameraBehaviour.ChangeFarClip(targetFarPlane, distance);
 
-            if(this.isServer) this.map.SetActive(this.target == initPos);
+            // if(this.isServer) this.map.SetActive(this.target == initPos);
             if (Vector3.Distance(transform.position, targetPosition) < 0.01 && Quaternion.Angle(toRotation, transform.rotation) < 1)
             {
                 targetChange = false;
                 this.readyToRotate = true;
             }
             this.currentTime = Time.time;
-        } else if (!standByLauch && Time.time >= currentTime + timeBeforeStandBy && !this.isServer) {
+        } else if (!standByLauch && Time.time >= currentTime + timeBeforeStandBy) {
             standByLauch = true;
             StartCoroutine("StandByLoop");
         }
@@ -181,13 +181,5 @@ public class TargetController : NetworkBehaviour {
                 yield return new WaitForSeconds(2f);
             }
         }
-    }
-
-    public override bool OnSerialize(NetworkWriter writer, bool initialState) {
-        if(initialState) {
-            
-        }
-
-        return false;
     }
 }

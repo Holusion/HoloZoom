@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
     public bool isClient;
     public GameObject canvas;
     public GameObject[] interactiveObjectWithBubbleText;
-    public NetworkHolusion networkHolusion;
 
     private bool skyChange = false;
 
@@ -17,7 +16,6 @@ public class GameManager : MonoBehaviour
 #endif
     void UpdateView() {
         this.canvas.SetActive(isClient);
-        this.networkHolusion.isClient = !this.isClient;
 
         foreach(GameObject go in interactiveObjectWithBubbleText) {
             go.transform.Find("BubbleText").gameObject.SetActive(!this.isClient);

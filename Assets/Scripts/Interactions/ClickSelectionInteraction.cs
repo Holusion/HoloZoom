@@ -11,7 +11,7 @@ public class ClickSelectionInteraction : Interaction
 
         if(Input.GetButtonDown(Player.BUTTON_LEFT)) 
         {
-            player.CmdWakeUp();
+            // player.CmdWakeUp();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -20,27 +20,28 @@ public class ClickSelectionInteraction : Interaction
             for(int i = 0; i < gameObjectsNames.Length; i++) {
                 gameObjectsNames[i] = hits[i].collider.gameObject.name;
             }
-            player.CmdTargets(gameObjectsNames);
+            // player.CmdTargets(gameObjectsNames);
         } 
         else if(Input.GetButtonDown(Player.BUTTON_RIGHT)) 
         {
-            player.CmdWakeUp();
-            player.CmdReset();
+            // player.CmdWakeUp();
+            // player.CmdReset();
         } 
         else if(Input.GetButton(Player.BUTTON_LEFT) && speed != 0)
         {
-            player.CmdWakeUp();
-            player.CmdRotate(speed);
+            // player.CmdWakeUp();
+            // player.CmdRotate(speed);
             lastSpeed = speed;
         } else {
             if(lastSpeed >= 0.001f || lastSpeed <= -0.001f) {
                 lastSpeed /= 1.1f;
-                player.CmdRotate(lastSpeed);
+                // player.CmdRotate(lastSpeed);
             }
         }
     }
 
     public override bool CanInteract(Player player) {
-        return !player.IsUI();
+        // return !player.IsUI();
+        return false;
     }
 }

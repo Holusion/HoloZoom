@@ -12,6 +12,7 @@ public class ButtonActivationInteraction : Interaction
     }
 
     public override bool CanInteract(Player player) {
-        return player.IsUI();
+        // return player.IsUI();
+        return false;
     }
 }
