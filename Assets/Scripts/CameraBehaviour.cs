@@ -16,14 +16,13 @@ public class CameraBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.initPos = this.transform.position;
-        this.initRot = this.transform.rotation;
+        GameObject trackerSpawn = GameObject.Find("TrackerSpawn");
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject tracker =  GameObject.Find("Tracker(Clone)");
+        GameObject tracker =  GameObject.FindWithTag("Tracker");
 
         if(tracker != null) {
             this.transform.position = tracker.transform.position;
