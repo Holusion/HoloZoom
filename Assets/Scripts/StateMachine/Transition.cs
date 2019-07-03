@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Transition {
+﻿public class Transition {
 
     public State targetState { get; private set; }
     public string trigger { get; private set; }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName="Click selector", menuName="Interactions/Click selector")]
 public class ClickSelectionInteraction : Interaction

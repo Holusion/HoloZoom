@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ZoomStateMachine : StateMachine
+﻿public class ZoomStateMachine : StateMachine
 {
     public ZoomStateMachine() : base()
     {
